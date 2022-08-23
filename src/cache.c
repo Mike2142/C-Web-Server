@@ -1,18 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "hashtable.h"
 #include "cache.h"
 
 /**
  * Allocate a cache entry
  */
-struct cache_entry *alloc_entry(char *path, char *content_type, void *content, int content_length)
+struct cache_entry *alloc_entry(char *path, char *content_type, void *content, int content_length, int timestamp)
 {
     struct cache_entry *cacheentry = malloc(sizeof *cacheentry);
     cacheentry->path = path;
     cacheentry->content_type = content_type;
     cacheentry->content_length = content_length;
+    cacheentry->timestamp = timestamp;
 
     cacheentry->content = malloc(content_length);
     memcpy(cacheentry->content, content, content_length);
@@ -66,6 +68,29 @@ void dllist_move_to_head(struct cache *cache, struct cache_entry *ce)
         cache->head->prev = ce;
         ce->prev = NULL;
         cache->head = ce;
+    }
+}
+
+void dllist_remove(struct cache *cache, struct cache_entry *ce)
+{   
+    if (cache->head == cache->tail) {
+        // if 1 entry 
+        cache->head = NULL;
+        cache->tail == NULL;
+    } 
+    else if (ce == cache->head) {
+        // if head
+        cache->head = ce->next;
+        cache->head->prev = NULL;
+    } 
+    else if (ce->next == NULL) {
+        // if tail
+        ce->prev->next = ce->next;
+    } 
+    else {
+        // if middle
+        ce->prev->next = ce->next;
+        ce->next->prev = ce->prev;
     }
 }
 
@@ -129,8 +154,11 @@ void cache_free(struct cache *cache)
  */
 void cache_put(struct cache *cache, char *path, char *content_type, void *content, int content_length)
 {
+    // get timestamp, epoch seconds
+    int timestamp = (int)time(NULL);
+    
     // add cache entry
-    struct cache_entry *cacheentry = alloc_entry(path, content_type, content, content_length);
+    struct cache_entry *cacheentry = alloc_entry(path, content_type, content, content_length, timestamp);
     dllist_insert_head(cache, cacheentry);
     hashtable_put(cache->index, path, cacheentry);
     
@@ -152,9 +180,21 @@ struct cache_entry *cache_get(struct cache *cache, char *path)
 {
     struct cache_entry *cacheentry = hashtable_get(cache->index, path);
 
-    if (cacheentry) {
+    int ts = (int)time(NULL); 
+    
+    // if cacheentry older than 10 sec. - remove it
+    if (cacheentry && ts - (*cacheentry).timestamp > 10) {
+        fprintf(stderr, "cacheentry expired: %s\n", cacheentry->path);
+
+        dllist_remove(cache, cacheentry);
+        hashtable_delete(cache->index, cacheentry->path);
+        free_entry(cacheentry);
+        return NULL;
+    } 
+    else if (cacheentry) {
         dllist_move_to_head(cache, cacheentry);
+        return cacheentry;
     }
 
-    return cacheentry;
+    return NULL;
 }

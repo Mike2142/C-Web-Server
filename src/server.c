@@ -145,6 +145,7 @@ void get_file(int fd, struct cache *cache, char *request_path)
 
     // store to cache
     cache_put(cache, request_path, mime_type, filedata->data, filedata->size);
+    fprintf(stderr, "file cached: %s\n", request_path);
 
     file_free(filedata);
 }
