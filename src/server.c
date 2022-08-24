@@ -38,6 +38,8 @@
 
 #define SERVER_FILES "./serverfiles"
 #define SERVER_ROOT "./serverroot"
+#define COMMENTS_FILE "./serverroot/comments.html"
+
 
 /**
  * Send an HTTP response
@@ -79,6 +81,15 @@ void get_d20(int fd)
     int result_length = strlen(roll_result);
 
     send_response(fd, "HTTP/1.1 200 OK", "text/plain", roll_result, result_length);
+}
+
+void get_comments(int fd)
+{
+    struct file_data *filedata; 
+    filedata = file_load(COMMENTS_FILE);
+
+    send_response(fd, "HTTP/1.1 200 OK", "text/html", filedata->data, filedata->size);
+    file_free(filedata);
 }
 
 /**
@@ -150,17 +161,61 @@ void get_file(int fd, struct cache *cache, char *request_path)
     file_free(filedata);
 }
 
+void post_save(int fd, char *request, int rlen, int bodystart)
+{
+    int bodylen = rlen - bodystart;
+    char *body = malloc(sizeof(char) * bodylen);
+    strncpy(body, request+bodystart, bodylen);
+
+    char *name;
+    char *comment;
+    char string[100];
+
+    // strings
+    name = strtok(body, "&");
+    comment = strtok(NULL, "&");
+
+    sscanf(name, "%*5s%s\n", name);
+    sscanf(comment, "%*8s%s\n", comment);
+
+    // time
+    time_t rawtime;
+    struct tm * timeinfo;
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    // result
+    snprintf(string, sizeof string, "<p>[%s] %s: %s</p><br>\n", asctime(timeinfo), name, comment);
+    file_write(COMMENTS_FILE, string);
+
+    free(body);
+}
+
 /**
  * Search for the end of the HTTP header
  * 
  * "Newlines" in HTTP can be \r\n (carriage return followed by newline) or \n
  * (newline) or \r (carriage return).
  */
-char *find_start_of_body(char *header)
+int find_start_of_body(char *request, int reqlen)
 {
-    ///////////////////
-    // IMPLEMENT ME! // (Stretch)
-    ///////////////////
+    int sob;
+    int bodylen;
+
+    // find last linebreak
+    for (int i = 0; i < reqlen; i++) {
+        if (request[i] == '\r' && request[i+1] == '\n') {
+            sob = i + 2;
+            continue;
+        } 
+        else if (request[i] == '\r' || request[i] == '\n') {
+            sob = i + 1;
+            continue;
+        } 
+    }
+
+    return sob;
 }
 
 /**
@@ -185,14 +240,30 @@ void handle_http_request(int fd, struct cache *cache)
 
     int get_flag = !strcmp(http_method, "GET"); 
     int d20_flag = !strcmp(request_path, "/d20");
+    int comments_flag = !strcmp(request_path, "/comments");
+    int post_flag = !strcmp(http_method, "POST/index.html"); 
+    int post_root_flag = !strcmp(http_method, "POST/"); 
 
-    if (get_flag && d20_flag)  {
+    if (d20_flag)  {
         get_d20(fd);
-    } else if (get_flag) {
-        get_file(fd, cache, request_path);
-    } 
+        return;
+    }
 
-    // (Stretch) TODO: POST, handle the post request
+    if (comments_flag) {
+        get_comments(fd);
+        return;
+    } 
+    
+    if (get_flag) {
+        get_file(fd, cache, request_path);
+    }
+
+    if (post_flag || post_root_flag) {
+        int rlen = strlen(request);
+        int sob = find_start_of_body(request, rlen);
+        post_save(fd, request, rlen, sob);
+        get_comments(fd);
+    }
 }
 
 /**

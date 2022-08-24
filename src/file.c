@@ -65,6 +65,13 @@ struct file_data *file_load(char *filename)
     return filedata;
 }
 
+void file_write(char *filename, char *comment) 
+{
+    FILE *f = fopen(filename, "a");
+    fputs(comment, f);
+    fclose(f);
+}
+
 /**
  * Frees memory allocated by file_load().
  */
