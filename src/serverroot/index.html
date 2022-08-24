@@ -3,7 +3,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>It works!</title>
+    <title>C Server 🟢</title>
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/b/ba/C_logo_pur.png">
   </head>
 
   <body>
@@ -38,7 +39,26 @@
       // the hash value of the page
       function changeLanguage(lang) {
         location.hash = lang;
-        location.reload();
+        //location.reload();
+
+        // Check if a hash value exists in the URL
+        if (window.location.hash) {
+        
+          // Set the content of the webpage 
+          // depending on the hash value
+          if (window.location.hash == "#rus") {
+            header.textContent = language.rus.welcome;
+            nameLabel.innerHTML = language.rus.name;
+            commentLabel.innerHTML = language.rus.comment;
+            submitBtn.value = language.rus.submit;
+          }
+          else if (window.location.hash == "#eng") {
+            header.textContent = language.eng.welcome;
+            nameLabel.innerHTML = language.eng.name;
+            commentLabel.innerHTML = language.eng.comment;
+            submitBtn.value = language.eng.submit;
+          }
+        }
       }
     
       // Define the language reload anchors
@@ -57,24 +77,6 @@
         },
       };
     
-      // Check if a hash value exists in the URL
-      if (window.location.hash) {
-    
-        // Set the content of the webpage 
-        // depending on the hash value
-        if (window.location.hash == "#rus") {
-          header.textContent = language.rus.welcome;
-          nameLabel.innerHTML = language.rus.name;
-          commentLabel.innerHTML = language.rus.comment;
-          submitBtn.value = language.rus.submit;
-        }
-        else if (window.location.hash == "#eng") {
-          header.textContent = language.eng.welcome;
-          nameLabel.innerHTML = language.eng.name;
-          commentLabel.innerHTML = language.eng.comment;
-          submitBtn.value = language.eng.submit;
-        }
-      }
     </script>
 
   </body>
