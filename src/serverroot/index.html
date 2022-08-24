@@ -20,6 +20,13 @@
     </h1>
     
     <br>
+    <br>
+
+    <span id="resume">Ссылка на резюме</span>
+    <a id="resumeRus">Рус</a>/<a id="resumeEng">Англ</a>
+
+    <br>
+    <br>
 
     <form method="POST">
       <label for="name" id="nameLabel">имя:</label><br>
@@ -51,12 +58,20 @@
             nameLabel.innerHTML = language.rus.name;
             commentLabel.innerHTML = language.rus.comment;
             submitBtn.value = language.rus.submit;
+
+            resume.innerHTML = language.rus.resume;
+            resumeRus.innerHTML = language.rus.resumeRus;
+            resumeEng.innerHTML = language.rus.resumeEng;
           }
           else if (window.location.hash == "#eng") {
             header.textContent = language.eng.welcome;
             nameLabel.innerHTML = language.eng.name;
             commentLabel.innerHTML = language.eng.comment;
             submitBtn.value = language.eng.submit;
+
+            resume.innerHTML = language.eng.resume;
+            resumeRus.innerHTML = language.eng.resumeRus;
+            resumeEng.innerHTML = language.eng.resumeEng;
           }
         }
       }
@@ -67,13 +82,19 @@
           welcome: "привет мир!",
           name: "имя",
           comment: "комментарий",
-          submit: "отправить"
+          submit: "отправить",
+          resume: "Ссылка на резюме",
+          resumeRus: "рус",
+          resumeEng: "англ"
         },
         eng: {
           welcome: "hi world!",
           name: "name",
           comment: "comment",
-          submit: "submit"
+          submit: "submit",
+          resume: "Resume link",
+          resumeRus: "rus",
+          resumeEng: "eng"
         },
       };
     
