@@ -7,6 +7,7 @@ struct file_data {
 };
 
 extern struct file_data *file_load(char *filename);
+extern void file_write(char *filename, char *comment);
 extern void file_free(struct file_data *filedata);
 
 #endif

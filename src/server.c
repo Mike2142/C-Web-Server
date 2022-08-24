@@ -29,6 +29,7 @@
 #include <time.h>
 #include <sys/file.h>
 #include <fcntl.h>
+#include <ctype.h>
 #include "net.h"
 #include "file.h"
 #include "mime.h"
@@ -75,12 +76,12 @@ int send_response(int fd, char *header, char *content_type, void *body, int cont
  */
 void get_d20(int fd)
 {
-    // Generate a random number between 1 and 20 inclusive
-    char roll_result[16];
-    sprintf(roll_result, "%d", rand() % 21);
+    // Generate a random number between 0 and 20 inclusive
+    char roll_result[50];
+    sprintf(roll_result, "<h1>%d</h1><h1>refresh to roll dice</h1>", rand() % 21);
     int result_length = strlen(roll_result);
 
-    send_response(fd, "HTTP/1.1 200 OK", "text/plain", roll_result, result_length);
+    send_response(fd, "HTTP/1.1 200 OK", "text/html", roll_result, result_length);
 }
 
 void get_comments(int fd)
@@ -161,35 +162,44 @@ void get_file(int fd, struct cache *cache, char *request_path)
     file_free(filedata);
 }
 
-void post_save(int fd, char *request, int rlen, int bodystart)
+void post_save(int fd, char *request, char *body, int bodylen)
 {
-    int bodylen = rlen - bodystart;
-    char *body = malloc(sizeof(char) * bodylen);
-    strncpy(body, request+bodystart, bodylen);
-
     char *name;
     char *comment;
-    char string[100];
+    char name_val[bodylen];
+    char comment_val[bodylen];
+    char string[500];
+    int dlecode = 16;
 
     // strings
     name = strtok(body, "&");
     comment = strtok(NULL, "&");
 
-    sscanf(name, "%*5s%s\n", name);
-    sscanf(comment, "%*8s%s\n", comment);
+    // strtok() fix, DLE symbol
+    int comlen = strlen(comment_val);    
+    int secval = (int)comment_val[1];
+
+    if (comlen == 2 && secval == dlecode ) {
+        comment_val[1] = '\0';
+    }
+
+    // extract values
+    sscanf(name, "%*5s%s", name_val);
+    sscanf(comment, "%*8s%s", comment_val);
+
+    // decode utf to char
+    urldecode2(name_val, name_val);
+    urldecode2(comment_val, comment_val);
 
     // time
     time_t rawtime;
     struct tm * timeinfo;
-
     time(&rawtime);
     timeinfo = localtime(&rawtime);
 
     // result
-    snprintf(string, sizeof string, "<p>[%s] %s: %s</p><br>\n", asctime(timeinfo), name, comment);
+    snprintf(string, sizeof string, "<p>[%s] %s: %s</p>\n", asctime(timeinfo), name_val, comment_val);
     file_write(COMMENTS_FILE, string);
-
-    free(body);
 }
 
 /**
@@ -201,7 +211,6 @@ void post_save(int fd, char *request, int rlen, int bodystart)
 int find_start_of_body(char *request, int reqlen)
 {
     int sob;
-    int bodylen;
 
     // find last linebreak
     for (int i = 0; i < reqlen; i++) {
@@ -223,7 +232,7 @@ int find_start_of_body(char *request, int reqlen)
  */
 void handle_http_request(int fd, struct cache *cache)
 {
-    const int request_buffer_size = 65536; // 64K
+    int request_buffer_size = 65536; // 64K
     char request[request_buffer_size];
     char http_method[4];
     char request_path[30];
@@ -231,7 +240,7 @@ void handle_http_request(int fd, struct cache *cache)
     // Read request
     int bytes_recvd = recv(fd, request, request_buffer_size - 1, 0);
 
-    if (bytes_recvd < 0) {
+    if (bytes_recvd <= 0) {
         perror("recv");
         return;
     }
@@ -259,11 +268,47 @@ void handle_http_request(int fd, struct cache *cache)
     }
 
     if (post_flag || post_root_flag) {
-        int rlen = strlen(request);
-        int sob = find_start_of_body(request, rlen);
-        post_save(fd, request, rlen, sob);
+        int sob = find_start_of_body(request, bytes_recvd);
+        int bodylen = bytes_recvd - sob;
+        
+        char body[bodylen];
+        strncpy(body, request+sob, bodylen);
+        body[bodylen] = '\0';
+
+        post_save(fd, request, body, bodylen);
         get_comments(fd);
     }
+}
+
+void urldecode2(char *dst, const char *src)
+{
+    char a, b;
+    while (*src) {
+        if ((*src == '%') &&
+            ((a = src[1]) && (b = src[2])) &&
+            (isxdigit(a) && isxdigit(b))) {
+                if (a >= 'a')
+                        a -= 'a'-'A';
+                if (a >= 'A')
+                        a -= ('A' - 10);
+                else
+                        a -= '0';
+                if (b >= 'a')
+                        b -= 'a'-'A';
+                if (b >= 'A')
+                        b -= ('A' - 10);
+                else
+                        b -= '0';
+                *dst++ = 16*a+b;
+                src+=3;
+        } else if (*src == '+') {
+                *dst++ = ' ';
+                src++;
+        } else {
+                *dst++ = *src++;
+        }
+    }
+    *dst++ = '\0';
 }
 
 /**
