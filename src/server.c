@@ -84,6 +84,16 @@ void get_d20(int fd)
     send_response(fd, "HTTP/1.1 200 OK", "text/html", roll_result, result_length);
 }
 
+void get_ip(int fd, char *ip)
+{
+    // Generate a random number between 0 and 20 inclusive
+    char html[50];
+    sprintf(html, "<h1>Your IP is: %s</h1>", ip);
+    int html_length = strlen(html);
+
+    send_response(fd, "HTTP/1.1 200 OK", "text/html", html, html_length);
+}
+
 void get_comments(int fd)
 {
     struct file_data *filedata; 
@@ -230,7 +240,7 @@ int find_start_of_body(char *request, int reqlen)
 /**
  * Handle HTTP request and send response
  */
-void handle_http_request(int fd, struct cache *cache)
+void handle_http_request(int fd, struct cache *cache, char *ipaddr)
 {
     int request_buffer_size = 65536; // 64K
     char request[request_buffer_size];
@@ -250,6 +260,9 @@ void handle_http_request(int fd, struct cache *cache)
     int get_flag = !strcmp(http_method, "GET"); 
     int d20_flag = !strcmp(request_path, "/d20");
     int comments_flag = !strcmp(request_path, "/comments");
+    int myip_flag = !strcmp(request_path, "/myip"); 
+
+
     int post_flag = !strcmp(http_method, "POST/index.html"); 
     int post_root_flag = !strcmp(http_method, "POST/"); 
 
@@ -262,6 +275,11 @@ void handle_http_request(int fd, struct cache *cache)
         get_comments(fd);
         return;
     } 
+
+    if (myip_flag) {
+        get_ip(fd, ipaddr);
+        return;
+    }
     
     if (get_flag) {
         get_file(fd, cache, request_path);
@@ -356,7 +374,7 @@ int main(void)
         // newfd is a new socket descriptor for the new connection.
         // listenfd is still listening for new connections.
 
-        handle_http_request(newfd, cache);
+        handle_http_request(newfd, cache, s);
 
         close(newfd);
     }
