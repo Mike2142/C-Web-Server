@@ -240,11 +240,11 @@ You'll have to add a `cache_delete` function to your cache code that does the wo
 
 _Difficulty: Pretty Dang Tough_
 
-Research the pthreads library.
+0. Research the pthreads library.
 
-When a new connection comes in, launch a thread to handle it.
+1. When a new connection comes in, launch a thread to handle it.
 
-Be sure to lock the cache when a thread accesses it so the threads don't step on each other's toes and corrupt the cache.
+2. Be sure to lock the cache when a thread accesses it so the threads don't step on each other's toes and corrupt the cache.
 
-Also have thread cleanup handlers to handle threads that have died.
+3. Also have thread cleanup handlers to handle threads that have died.
 

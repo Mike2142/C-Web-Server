@@ -30,6 +30,8 @@
 #include <sys/file.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include <pthread.h>
+
 #include "net.h"
 #include "file.h"
 #include "mime.h"
@@ -41,6 +43,13 @@
 #define SERVER_ROOT "./serverroot"
 #define COMMENTS_FILE "./serverroot/comments.html"
 
+struct handler_args {
+    int fd;
+    void *cache;
+    char *socket;
+};
+
+pthread_mutex_t lock;
 
 /**
  * Send an HTTP response
@@ -142,12 +151,16 @@ void get_file(int fd, struct cache *cache, char *request_path)
     if (strcmp(request_path, "/") == 0) {
         request_path = "/index.html";
     }
-    
+
+    pthread_mutex_lock(&lock);
+
     // check cache
     cacheentry = cache_get(cache, request_path);
     if (cacheentry) {    
         fprintf(stderr, "cacheentry found: %s\n", cacheentry->path);
         send_response(fd, "HTTP/1.1 200 OK", cacheentry->content_type, cacheentry->content, cacheentry->content_length);
+        
+        pthread_mutex_unlock(&lock);
         return;
     }
     
@@ -159,6 +172,8 @@ void get_file(int fd, struct cache *cache, char *request_path)
         // show 404
         fprintf(stderr, "cannot find file %s\n", request_path);
         resp_404(fd);
+
+        pthread_mutex_unlock(&lock);
         return;
     }
 
@@ -168,8 +183,9 @@ void get_file(int fd, struct cache *cache, char *request_path)
     // store to cache
     cache_put(cache, request_path, mime_type, filedata->data, filedata->size);
     fprintf(stderr, "file cached: %s\n", request_path);
-
     file_free(filedata);
+
+    pthread_mutex_unlock(&lock);
 }
 
 void post_save(int fd, char *request, char *body, int bodylen)
@@ -237,11 +253,25 @@ int find_start_of_body(char *request, int reqlen)
     return sob;
 }
 
+void close_conn(struct handler_args *args)
+{
+    int fd = args->fd;
+    free(args);
+    close(fd);
+}
+
 /**
  * Handle HTTP request and send response
- */
-void handle_http_request(int fd, struct cache *cache, char *ipaddr)
+ */ // void *arguments;
+//void handle_http_request(int fd, struct cache *cache, char *ipaddr)
+void handle_http_request(struct handler_args *args)
 {
+    pthread_cleanup_push(close_conn, args);
+
+    int fd = args->fd;
+    struct cache *cache = args->cache;
+    char *ipaddr = args->socket;
+
     int request_buffer_size = 65536; // 64K
     char request[request_buffer_size];
     char http_method[4];
@@ -268,20 +298,14 @@ void handle_http_request(int fd, struct cache *cache, char *ipaddr)
 
     if (d20_flag)  {
         get_d20(fd);
-        return;
     }
-
-    if (comments_flag) {
+    else if (comments_flag) {
         get_comments(fd);
-        return;
     } 
-
-    if (myip_flag) {
+    else if (myip_flag) {
         get_ip(fd, ipaddr);
-        return;
     }
-    
-    if (get_flag) {
+    else if (get_flag) {
         get_file(fd, cache, request_path);
     }
 
@@ -296,6 +320,9 @@ void handle_http_request(int fd, struct cache *cache, char *ipaddr)
         post_save(fd, request, body, bodylen);
         get_comments(fd);
     }
+
+    pthread_cleanup_pop(1);
+    return;
 }
 
 void urldecode2(char *dst, const char *src)
@@ -338,6 +365,11 @@ int main(void)
     struct sockaddr_storage their_addr; // connector's address information
     char s[INET6_ADDRSTRLEN];
 
+    if (pthread_mutex_init(&lock, NULL) != 0) {
+        printf("\n mutex init has failed\n");
+        return 1;
+    }
+
     struct cache *cache = cache_create(10, 0);
 
     // Get a listening socket
@@ -374,13 +406,18 @@ int main(void)
         // newfd is a new socket descriptor for the new connection.
         // listenfd is still listening for new connections.
 
-        handle_http_request(newfd, cache, s);
+        // prepare http handler
+        struct handler_args *hargs = malloc(sizeof(hargs));
+        hargs->fd = newfd;
+        hargs->cache = cache;
+        hargs->socket = s;
 
-        close(newfd);
+        // create thread
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, handle_http_request, hargs);
     }
 
     // Unreachable code
-
     return 0;
 }
 
