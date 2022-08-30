@@ -293,8 +293,9 @@ void handle_http_request(struct handler_args *args)
     int myip_flag = !strcmp(request_path, "/myip"); 
 
 
-    int post_flag = !strcmp(http_method, "POST/index.html"); 
-    int post_root_flag = !strcmp(http_method, "POST/"); 
+    int post0_flag = !strcmp(http_method, "POST");
+    int post1_flag = !strcmp(http_method, "POST/");
+    int post2_flag = !strcmp(http_method, "POST/index.html"); 
 
     if (d20_flag)  {
         get_d20(fd);
@@ -309,7 +310,7 @@ void handle_http_request(struct handler_args *args)
         get_file(fd, cache, request_path);
     }
 
-    if (post_flag || post_root_flag) {
+    if (post0_flag || post1_flag || post2_flag) {
         int sob = find_start_of_body(request, bytes_recvd);
         int bodylen = bytes_recvd - sob;
         
