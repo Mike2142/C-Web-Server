@@ -111,8 +111,8 @@ void get_d20(int fd)
 void get_ip(int fd, char *ip)
 {
     // Generate a random number between 0 and 20 inclusive
-    char html[50];
-    sprintf(html, "<h1>Your IP is: %s</h1>", ip);
+    char html[200];
+    sprintf(html, "<h1>Your IP is: %s</h1><h1>Nice to meet you!</h1>", ip);
     int html_length = strlen(html);
 
     send_response(fd, "HTTP/1.1 200 OK", "text/html", html, html_length);

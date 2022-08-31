@@ -1,104 +1,157 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>C Server 🟢</title>
-    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/b/ba/C_logo_pur.png">
-  </head>
 
-  <body>
-    <button onclick="changeLanguage('rus')">
-      Change to Russian
-    </button>
-    <button onclick="changeLanguage('eng')">
-      Change to English
-    </button>
-
-    <h1 id="header">
-      привет мир!
-    </h1>
+<head>
+  <meta charset="utf-8">
+  <title>C Server 🟢</title>
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/b/ba/C_logo_pur.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     
-    <br>
-    <br>
+  <script src="script.js"></script>
 
-    <span id="resume">Ссылка на резюме</span>
-    <a id="resumeRus">Рус</a>/<a id="resumeEng">Англ</a>
+  <style>
+    body {
+      padding: 20px;
+      margin: 0;
+      font-family: Tinos, 'Times New Roman', Times, serif, serif;
+    }
 
-    <br>
-    <br>
+    h2 {
+      color: rgb(210, 206, 200);
+      color: gainsboro;
+      color: #330000;
+    }
 
-    <form method="POST">
-      <label for="name" id="nameLabel">имя:</label><br>
-      <input type="text" id="name" name="name" value="" required><br>
+    p {
+      white-space: pre;
+      font-size: 17px;
+      color: rgb(210, 206, 200);
+      color: gainsboro;
+      color: #330000;
+    }
 
-      <label for="comment" id="commentLabel">сообщение:</label><br>
-      <input type="text" id="comment" name="comment" 
-      value="" required><br>
-      
-      <input type="submit" id="submitBtn" value="Submit">
-    
-    </form>
+    a {
+      color: blue;
+    }
+  </style>
+
+</head>
+
+<body>
+  <button onclick="changeLanguage('rus')">
+    Change to Russian
+  </button>
+  <button onclick="changeLanguage('eng')">
+    Change to English
+  </button>
+
+  <h2 id="header">
+    Привет мир!
+  </h2>
+
+<p id="intro">Я - Михаил Колядин, инженер программного обеспечения и будущий архитектор ПО ). 
+Это мой сайт-резюме, отправленный вам домашним сервером, написанном на языке C в августе 2022. 
+Сервер использует только стандартные библиотеки пакета GCC.</p>
+
+<p id="aboutMe">Обо мне: люблю спорт, программирование, коммандную работу и самореализацию
+Чему я учусь: архитектура компьютера, сети, язык C
+Подробное резюме: <a id="resumeRus">Рус</a>/<a id="resumeEng">Англ</a>
+</p>
+
+<p id="lookout">Проект, который я ищу
+- предпочтительный стэк: C/C#/.Net, Java/Spring
+- предпочтительная область: телеком, сети
+</p>
+
+<h2 id="">
+  Сервер С
+</h2>
+<p id="server">О сервере C, возможности
+- HTTP, парсинг запросов
+- HTTP, создание ответов
+- Отправка файлов
+- LRU кэш файлов
+  - кэш таблица и связанный список
+  - срок годности кэш-файлов
+- Многопоточность (pthread.h), блокировка файлов и чистка памяти
+
+О сервере C, страницы
+- <a>/index.html</a>
+  - также открывается в <a>корне сайта /</a>
+  - <a>форма сообщений</a>
+- <a>/comments.html</a>, база сообщений
+- <a>/d20</a> api, генерация случайного числа 0-20
+- <a>/myip</a> api, вывод ip адреса пользователя
+</p>
+
+<h2 id="">
+  Backend разработка
+</h2>
+<p id="backendTools">Backend инструменты
+- C
+- Python, Django
+- SQL, PostGre, OracleDB, MySQL
+- Unix systems, Windows 10, Docker
+- IBM Software, Omnibus, Jazz
+- etc.
+</p>
+
+<p id="backendComm">Backend, коммерческие проекты
+- various projects for enriching data with info collected from other systems and from user input, and sending it further to db or next backend app
+- service to read emails from MS Exchange, parse them and generate alerts to IBM Fault Management system
+- statistics map (backend), fetching and calculating realtime equipment statistics, by city, region or sum. For further rendering on schematic country map, shown on wall-mounted tv-panels
+</p>
+
+<p id="backendTrain">Backend, <a>учебные проекты</a> (2020)
+</p>
 
 
-    <script>
-      // Create a function to change
-      // the hash value of the page
-      function changeLanguage(lang) {
-        location.hash = lang;
-        //location.reload();
+<h2 id="">
+  Frontend разработка
+</h2>
 
-        // Check if a hash value exists in the URL
-        if (window.location.hash) {
-        
-          // Set the content of the webpage 
-          // depending on the hash value
-          if (window.location.hash == "#rus") {
-            header.textContent = language.rus.welcome;
-            nameLabel.innerHTML = language.rus.name;
-            commentLabel.innerHTML = language.rus.comment;
-            submitBtn.value = language.rus.submit;
+<p id="frontendTools">Frontend инструменты
+- JavaScript, RxJs, Angular
+- CSS, SCSS, SASS, Less, Stylus
+- HTML, Nunjucks
+- npm, etc.  
+</p>
 
-            resume.innerHTML = language.rus.resume;
-            resumeRus.innerHTML = language.rus.resumeRus;
-            resumeEng.innerHTML = language.rus.resumeEng;
-          }
-          else if (window.location.hash == "#eng") {
-            header.textContent = language.eng.welcome;
-            nameLabel.innerHTML = language.eng.name;
-            commentLabel.innerHTML = language.eng.comment;
-            submitBtn.value = language.eng.submit;
+<p id="frontendComm">Frontend, коммерческие проекты
+- spa, browser menus and forms for parsing and enriching network alerts, and sending them for further usage
+- gis map
+    - realtime data 
+    - equipment locations
+    - interactive alerts table
+    - map navigation
+    - developed for realtime monitoring on wall-mounted tv-panels
+- statistics-map (frontend), realtime equipment statistics, shown by city, region or sum. Rendered on schematic country map and shown on wall-mounted tv-panels
+- spa, charts interfaces (2 projects), equipment statistics monitoring, interactive charts and equipment data
+- SaaS platform for SEO optimization
+</p>
 
-            resume.innerHTML = language.eng.resume;
-            resumeRus.innerHTML = language.eng.resumeRus;
-            resumeEng.innerHTML = language.eng.resumeEng;
-          }
-        }
-      }
-    
-      // Define the language reload anchors
-      var language = {
-        rus: {
-          welcome: "привет мир!",
-          name: "имя",
-          comment: "комментарий",
-          submit: "отправить",
-          resume: "Ссылка на резюме",
-          resumeRus: "рус",
-          resumeEng: "англ"
-        },
-        eng: {
-          welcome: "hi world!",
-          name: "name",
-          comment: "comment",
-          submit: "submit",
-          resume: "Resume link",
-          resumeRus: "rus",
-          resumeEng: "eng"
-        },
-      };
-    
-    </script>
+<p id="frontendTrain">Frontend, <a>учебные проекты</a> (2019)
+</p>
 
-  </body>
+<h2 id="">
+  Форма сообщений
+</h2>
+
+  <form method="POST" style="padding: 0 0 40px 0;">
+    <label for="name" id="nameLabel">Имя</label><br>
+    <input type="text" id="name" name="name" value="" required><br>
+
+    <label for="comment" id="commentLabel">Сообщение</label><br>
+    <input type="text" id="comment" name="comment" value="" required><br>
+
+    <input type="submit" id="submitBtn" value="Отправить">
+  </form>
+
+
+</body>
+
 </html>
