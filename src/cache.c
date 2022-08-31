@@ -76,7 +76,7 @@ void dllist_remove(struct cache *cache, struct cache_entry *ce)
     if (cache->head == cache->tail) {
         // if 1 entry 
         cache->head = NULL;
-        cache->tail == NULL;
+        cache->tail = NULL;
     } 
     else if (ce == cache->head) {
         // if head
@@ -92,6 +92,8 @@ void dllist_remove(struct cache *cache, struct cache_entry *ce)
         ce->prev->next = ce->next;
         ce->next->prev = ce->prev;
     }
+
+    cache->cur_size--;
 }
 
 
@@ -170,7 +172,6 @@ void cache_put(struct cache *cache, char *path, char *content_type, void *conten
     // reduce cache
     struct cache_entry *lastentry = dllist_remove_tail(cache);
     hashtable_delete(cache->index, lastentry->path);
-    free_entry(lastentry);
 }
 
 /**
@@ -188,7 +189,6 @@ struct cache_entry *cache_get(struct cache *cache, char *path)
 
         dllist_remove(cache, cacheentry);
         hashtable_delete(cache->index, cacheentry->path);
-        free_entry(cacheentry);
         return NULL;
     } 
     else if (cacheentry) {

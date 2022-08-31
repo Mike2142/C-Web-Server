@@ -19,10 +19,13 @@ struct file_data *file_load(char *filename)
         return NULL;
     }
 
+    // TODO: file check, update for Centos7
     // Make sure it's a regular file
+    /* 
     if (!(buf.st_mode & S_IFREG)) {
         return NULL;
-    }
+    } 
+    */
 
     // Open the file for reading
     FILE *fp = fopen(filename, "rb");
@@ -61,6 +64,9 @@ struct file_data *file_load(char *filename)
 
     filedata->data = buffer;
     filedata->size = total_bytes;
+
+    // TODO: fclose, redundancy check
+    //fclose(fp);
 
     return filedata;
 }

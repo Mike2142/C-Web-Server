@@ -51,6 +51,21 @@ struct handler_args {
 
 pthread_mutex_t lock;
 
+char* get_time(){
+  char output[20];
+  time_t rawtime;
+  struct tm * timeinfo;
+  
+  time(&rawtime);
+  timeinfo = localtime(&rawtime);
+  
+  sprintf(output, "[%.2d.%.2d.%d %.2d:%.2d:%.2d]", timeinfo->tm_mday,
+          timeinfo->tm_mon + 1, timeinfo->tm_year + 1900,
+          timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+
+  return output;
+}
+
 /**
  * Send an HTTP response
  *
@@ -103,15 +118,6 @@ void get_ip(int fd, char *ip)
     send_response(fd, "HTTP/1.1 200 OK", "text/html", html, html_length);
 }
 
-void get_comments(int fd)
-{
-    struct file_data *filedata; 
-    filedata = file_load(COMMENTS_FILE);
-
-    send_response(fd, "HTTP/1.1 200 OK", "text/html", filedata->data, filedata->size);
-    file_free(filedata);
-}
-
 /**
  * Send a 404 response
  */
@@ -148,7 +154,10 @@ void get_file(int fd, struct cache *cache, char *request_path)
     struct file_data *filedata; 
     char *mime_type;
 
-    if (strcmp(request_path, "/") == 0) {
+    int rootflag = strcmp(request_path, "/");
+    int commentsflag = strcmp(request_path, "/comments.html");
+
+    if (rootflag == 0) {
         request_path = "/index.html";
     }
 
@@ -156,7 +165,7 @@ void get_file(int fd, struct cache *cache, char *request_path)
 
     // check cache
     cacheentry = cache_get(cache, request_path);
-    if (cacheentry) {    
+    if (cacheentry && commentsflag != 0) {    
         fprintf(stderr, "cacheentry found: %s\n", cacheentry->path);
         send_response(fd, "HTTP/1.1 200 OK", cacheentry->content_type, cacheentry->content, cacheentry->content_length);
         
@@ -181,10 +190,12 @@ void get_file(int fd, struct cache *cache, char *request_path)
     send_response(fd, "HTTP/1.1 200 OK", mime_type, filedata->data, filedata->size);
 
     // store to cache
-    cache_put(cache, request_path, mime_type, filedata->data, filedata->size);
-    fprintf(stderr, "file cached: %s\n", request_path);
+    if (commentsflag != 0) {
+        cache_put(cache, request_path, mime_type, filedata->data, filedata->size);
+        fprintf(stderr, "file cached: %s\n", request_path);
+    }
+    
     file_free(filedata);
-
     pthread_mutex_unlock(&lock);
 }
 
@@ -217,15 +228,12 @@ void post_save(int fd, char *request, char *body, int bodylen)
     urldecode2(name_val, name_val);
     urldecode2(comment_val, comment_val);
 
-    // time
-    time_t rawtime;
-    struct tm * timeinfo;
-    time(&rawtime);
-    timeinfo = localtime(&rawtime);
-
     // result
-    snprintf(string, sizeof string, "<p>[%s] %s: %s</p>\n", asctime(timeinfo), name_val, comment_val);
+    snprintf(string, sizeof string, "<p>%s %s: %s</p>\n", get_time(), name_val, comment_val);
+    
+    pthread_mutex_lock(&lock);
     file_write(COMMENTS_FILE, string);
+    pthread_mutex_unlock(&lock);
 }
 
 /**
@@ -289,20 +297,18 @@ void handle_http_request(struct handler_args *args)
 
     int get_flag = !strcmp(http_method, "GET"); 
     int d20_flag = !strcmp(request_path, "/d20");
-    int comments_flag = !strcmp(request_path, "/comments");
     int myip_flag = !strcmp(request_path, "/myip"); 
-
 
     int post0_flag = !strcmp(http_method, "POST");
     int post1_flag = !strcmp(http_method, "POST/");
     int post2_flag = !strcmp(http_method, "POST/index.html"); 
 
+    fprintf(stderr, "\nhttp_method: %s\n", http_method);
+    fprintf(stderr, "request_path: %s\n", request_path);
+
     if (d20_flag)  {
         get_d20(fd);
     }
-    else if (comments_flag) {
-        get_comments(fd);
-    } 
     else if (myip_flag) {
         get_ip(fd, ipaddr);
     }
@@ -319,7 +325,7 @@ void handle_http_request(struct handler_args *args)
         body[bodylen] = '\0';
 
         post_save(fd, request, body, bodylen);
-        get_comments(fd);
+        get_file(fd, cache, "/comments.html");
     }
 
     pthread_cleanup_pop(1);
@@ -402,7 +408,7 @@ int main(void)
         inet_ntop(their_addr.ss_family,
             get_in_addr((struct sockaddr *)&their_addr),
             s, sizeof s);
-        printf("server: got connection from %s\n", s);
+        printf("%s server: got connection from %s\n", get_time(), s);
         
         // newfd is a new socket descriptor for the new connection.
         // listenfd is still listening for new connections.
