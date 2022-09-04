@@ -12,9 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js"></script>
-
-
 </head>
 
 <body>
@@ -59,7 +56,10 @@
 <p id="contacts">Спасибо за ваше внимание! 
 Буду рад обсудить любые идеи и предложения:
 почта 2surfingbirds@gmail.com
-телеграм <a href="https://t.me/MikeFlow108" target="_blank">@MikeFlow108</a></p>
+telegram <a href="https://t.me/MikeFlow108" target="_blank">@MikeFlow108</a>
+whatsapp <a href="https://wa.me/79265265663" target="_blank">ссылка</a>
+</p>
+
 
 <h2 id="headerC">
   Сервер С
@@ -69,7 +69,7 @@
 - HTTP, создание ответов
 - Отправка файлов
 - LRU кэш файлов
-    - кэш таблица и связанный список
+    - хэш таблица и связанный список
     - срок годности кэш-файлов
 - Многопоточность (pthread.h), блокировка файлов и чистка памяти
 - Сообщения, парсинг UTF-8 и обогащение
@@ -98,7 +98,8 @@
 <p id="backendComm">Backend, коммерческие проекты
 - проекты по насыщению данных от систем и пользователя, созданию записей в базе данных, передаче потока следующему приложению
 - сервис чтения писем из корпоративных ящиков MS Exchange, парсинга содержания и создания записей/аварий в системе IBM Fault Management
-- backend для карты сети, со статистикой аварий. круглосуточная трансляция на видеостене заказчика. кэширование и преобразования данных между базами, сбор данных в приложение, вычисление статистики оп городам и регионам, общие суммы. 
+- backend для карты сети, со статистикой аварий. круглосуточная трансляция на видеостене заказчика. 
+  кэширование и преобразования данных между базами, сбор данных в приложение, вычисление статистики по городам и регионам, общие суммы. 
 </p>
 
 <p id="backendTrain">Backend, <a href="https://github.com/Mike2142/cs50web" target="_blank">учебные проекты</a> (2020)
@@ -124,7 +125,8 @@
     - интерактивная таблица аварий
     - навигация по карте, вручную и переход к аварии из таблицы
     - разработано для круглосуточной трансляции на видео-панелях
-- карта статистика сети, состояние оборудования в реальном времени, общие данные по городам, регионам и суммам. Визуализация на схематической карте страны, трансляция на видео-панели
+- карта статистика сети, состояние оборудования в реальном времени, общие данные по городам, регионам и суммам. 
+  визуализация на схематической карте страны, трансляция на видео-панели
 - spa приложение. Интерактивные графики по трафику, ошибкам и состоянию оборудования. 
 - SaaS платформа, SEO оптимизация сайтов
 </p>
@@ -136,17 +138,19 @@
   Форма сообщений
 </h2>
 
-  <form method="POST" style="padding: 0 0 40px 0;">
-    <label for="name" id="nameLabel">Имя</label><br>
-    <input type="text" id="name" name="name" value="" required><br>
+  <form method="POST">
+    <label for="name" id="nameLabel">Имя</label>
+    <input type="text" id="name" name="name" value="" required>
 
-    <label for="comment" id="commentLabel">Сообщение</label><br>
-    <input type="text" id="comment" name="comment" value="" required><br>
+    <label for="comment" id="commentLabel">Сообщение</label>
+    <input type="text" id="comment" name="comment" value="" required>
 
     <input type="submit" id="submitBtn" value="Отправить">
   </form>
 
 </div>
+
+<script src="script.js"></script>
 
 </body>
 

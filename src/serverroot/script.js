@@ -1,3 +1,230 @@
+
+let navRus = `<a href="#header">Вступление</a>
+<a href="#headerC">Сервер</a>
+<a href="#headerBack">Backend</a>
+<a href="#headerFront">Frontend</a>
+<a href="#headerForm">Сообщения</a>`;
+
+let navEng = `<a href="#header">Intro</a>
+<a href="#headerC">Server</a>
+<a href="#headerBack">Backend</a>
+<a href="#headerFront">Frontend</a>
+<a href="#headerForm">Messages</a>`;
+
+let headerCRus = "Сервер С";
+let headerFrontRus = "Frontend разработка";
+let headerBackRus = "Backend разработка";
+let headerFormRus = "Форма сообщений";
+
+let headerCEng = "Server in С";
+let headerFrontEng = "Frontend development";
+let headerBackEng = "Backend development";
+let headerFormEng = "Message form";
+
+
+let introRus = `Я - Михаил Колядин, инженер программного обеспечения и будущий архитектор ПО ). 
+Это мой сайт-резюме, отправленный вам домашним сервером, написанном на языке C в августе 2022. 
+Сервер использует только стандартные библиотеки пакета GCC.`;
+let aboutMeRus = `Обо мне: люблю спорт, программирование, коммандную работу и самореализацию
+Чему я учусь: архитектура компьютера, сети, язык C
+Подробное резюме: <a target="_blank">Рус</a>/<a target="_blank">Англ</a>`;
+let lookoutRus = `Проект, который я ищу
+- предпочтительный стэк: C/C#/.Net, Java/Spring
+- предпочтительная область: телеком, сети`;
+let contactsRus = `Спасибо за ваше внимание! 
+Буду рад обсудить любые идеи и предложения:
+почта 2surfingbirds@gmail.com
+telegram <a href="https://t.me/MikeFlow108" target="_blank">@MikeFlow108</a>
+whatsapp <a href="https://wa.me/79265265663" target="_blank">ссылка</a>
+`;
+
+let introEng = `I’m Mike Kolyadin, a software engineer and wannabe software architect.
+This is my resume-page, sent to you by home-server coded in C language in August 2022.
+This server utilizes only the standard GCC libraries.`;
+let aboutMeEng = `About me: love for sports, programming, teamwork and self-realization
+My everyday studies: computer architecture, networks, c language
+Detailed resume: <a target="_blank">Rus</a>/<a target="_blank">Eng</a>`;
+let lookoutEng = `Next project lookout
+- preferable stacks: C/C#/.Net/ , Java/Spring
+- preferable field: telecom, networks`;
+let contactsEng = `Thanks for your attention! 
+Please, feel free to reach out:
+email 2surfingbirds@gmail.com
+telegram <a href="https://t.me/MikeFlow108" target="_blank">@MikeFlow108</a>
+whatsapp <a href="https://wa.me/79265265663" target="_blank">link</a>
+`;
+
+
+let serverRus = `Возможности
+- HTTP, парсинг запросов
+- HTTP, создание ответов
+- Отправка файлов
+- LRU кэш файлов
+    - хэш таблица и связанный список
+    - срок годности кэш-файлов
+- Многопоточность (pthread.h), блокировка файлов и чистка памяти
+- Сообщения, парсинг UTF-8 и обогащение
+
+Страницы
+- <a href="/index.html" target="_blank">/index.html</a>
+    - также открывается в <a href="/" target="_blank">корне сайта /</a>
+    - <a href="#headerForm">форма сообщений</a>
+- <a href="/comments.html" target="_blank">/comments.html</a>, база сообщений
+- <a href="/d20" target="_blank">/d20</a> api, генерация случайного числа 0-20
+- <a href="/myip" target="_blank">/myip</a> api, вывод ip адреса пользователя`;
+
+let serverEng = `Capabilities
+- HTTP, request parser
+- HTTP, response builder
+- File serving
+- LRU file cache
+    - hash table and double-linked list
+    - cache files expiration
+- Multithreading (pthread.h), file blocking and cleanup handler
+- Messaging, UTF-8 decoding and message enrichment
+
+Site pages
+- <a href="/index.html" target="_blank">/index.html</a>
+    - opens as <a href="/" target="_blank">root /</a>
+    - <a href="#headerForm" >message form</a>
+- <a href="/comments.html" target="_blank">/comments.html</a>, message base
+- <a href="/d20" target="_blank">/d20</a> api, generates random number
+- <a href="/myip" target="_blank">/myip</a> api, sends user's IP`;
+
+
+let backendToolsRus = `Backend инструменты
+- C
+- Python, Django
+- SQL, PostGre, OracleDB, MySQL
+- Unix systems, Windows 10, Docker
+- IBM Software, Omnibus, Jazz
+- и подобные`;
+let backendCommRus = `Backend, коммерческие проекты
+- проекты по насыщению данных от систем и пользователя, созданию записей в базе данных, передаче потока следующему приложению
+- сервис чтения писем из корпоративных ящиков MS Exchange, парсинга содержания и создания записей/аварий в системе IBM Fault Management
+- backend для карты сети, со статистикой аварий. круглосуточная трансляция на видеостене заказчика. 
+  кэширование и преобразования данных между базами, сбор данных в приложение, вычисление статистики по городам и регионам, общие суммы.`;
+let backendTrainRus = `Backend, <a href="https://github.com/Mike2142/cs50web" target="_blank">учебные проекты</a> (2020)`;
+
+
+let backendToolsEng = `Backend tools
+- C
+- Python, Django
+- SQL, PostGre, OracleDB, MySQL
+- Unix systems, Windows 10, Docker
+- IBM Software, Omnibus, Jazz
+- etc.`;
+let backendCommEng = `Backend, commercial projects
+- various projects for enriching data with info collected from other systems and from user input, and sending it further to db or next backend app
+- service to read emails from MS Exchange, parse them and generate alerts to IBM Fault Management system
+- statistics map (backend), fetching and calculating realtime equipment statistics, by city, region or sum. 
+  for further rendering on schematic country map, shown on wall-mounted tv-panels`;
+let backendTrainEng = `Backend, <a href="https://github.com/Mike2142/cs50web" target="_blank">training projects</a> (2020)`;
+
+
+let frontendToolsRus = `Frontend инструменты
+- JavaScript, RxJs, Angular
+- CSS, SCSS, SASS, Less, Stylus
+- HTML, Nunjucks
+- npm, и другие`;
+let frontendCommRus = `Frontend, коммерческие проекты
+- spa приложение, меню и формы для парсинга и обогащения сетевых аварий, и отправки данных для дальнейшего использования
+- географическая карта сети
+    - отображние данных в реальном времени 
+    - точки установки оборудования
+    - интерактивная таблица аварий
+    - навигация по карте, вручную и переход к аварии из таблицы
+    - разработано для круглосуточной трансляции на видео-панелях
+- карта статистика сети, состояние оборудования в реальном времени, общие данные по городам, регионам и суммам. 
+  визуализация на схематической карте страны, трансляция на видео-панели
+- spa приложение. Интерактивные графики по трафику, ошибкам и состоянию оборудования. 
+- SaaS платформа, SEO оптимизация сайтов`;
+let frontendTrainRus = `Frontend, <a href="https://github.com/Mike2142/Demo" target="_blank">учебные проекты</a> (2019)`;
+
+
+let frontendToolsEng = `Frontend tools
+- JavaScript, RxJs, Angular
+- CSS, SCSS, SASS, Less, Stylus
+- HTML, Nunjucks
+- npm, etc.`;
+let frontendCommEng = `Frontend, commercial projects
+- spa, browser menus and forms for parsing and enriching network alerts, and sending them for further usage
+- gis map
+    - realtime data 
+    - equipment locations
+    - interactive alerts table
+    - map navigation
+    - developed for realtime monitoring on wall-mounted tv-panels
+- statistics-map (frontend), realtime equipment statistics, shown by city, region or sum. 
+  rendered on schematic country map and shown on wall-mounted tv-panels
+- spa, charts interfaces (2 projects), equipment statistics monitoring, interactive charts and equipment data
+- SaaS platform for SEO optimization`;
+let frontendTrainEng = `Frontend, <a href="https://github.com/Mike2142/Demo" target="_blank">training projects</a> (2019)`;
+
+
+// Define the language reload anchors
+var language = {
+    rus: {
+        nav: navRus,
+
+        header: "Привет мир!",
+        headerC: headerCRus,
+        headerBack: headerBackRus,
+        headerFront: headerFrontRus,
+        headerForm: headerFormRus,
+
+        name: "Имя",
+        comment: "Сообщение",
+        submit: "Отправить",
+        resumeRus: "Рус",
+        resumeEng: "Англ",
+
+        intro: introRus,
+        aboutMe: aboutMeRus,
+        lookout: lookoutRus,
+        contacts: contactsRus,
+
+        server: serverRus,
+        backendTools: backendToolsRus,
+        backendComm: backendCommRus,
+        backendTrain: backendTrainRus,
+
+        frontendTools: frontendToolsRus,
+        frontendComm: frontendCommRus,
+        frontendTrain: frontendTrainRus,
+    },
+    eng: {
+        nav: navEng,
+
+        header: "Hi world!",
+        headerC: headerCEng,
+        headerBack: headerBackEng,
+        headerFront: headerFrontEng,
+        headerForm: headerFormEng,
+
+        name: "Name",
+        comment: "Message",
+        submit: "Submit",
+        resumeRus: "Rus",
+        resumeEng: "Eng",
+
+        intro: introEng,
+        aboutMe: aboutMeEng,
+        lookout: lookoutEng,
+        contacts: contactsEng,
+
+        server: serverEng,
+        backendTools: backendToolsEng,
+        backendComm: backendCommEng,
+        backendTrain: backendTrainEng,
+
+        frontendTools: frontendToolsEng,
+        frontendComm: frontendCommEng,
+        frontendTrain: frontendTrainEng,
+    },
+};
+
+
 // Create a function to change
 // the hash value of the page
 function changeLanguage(lang) {
@@ -67,222 +294,8 @@ function changeLanguage(lang) {
     }
 }
 
-let navRus = `<a href="#header">Вступление</a>
-<a href="#headerC">Сервер</a>
-<a href="#headerBack">Backend</a>
-<a href="#headerFront">Frontend</a>
-<a href="#headerForm">Сообщения</a>`;
-
-let navEng = `<a href="#header">Intro</a>
-<a href="#headerC">Server</a>
-<a href="#headerBack">Backend</a>
-<a href="#headerFront">Frontend</a>
-<a href="#headerForm">Messages</a>`;
-
-let headerCRus = "Сервер С";
-let headerFrontRus = "Frontend разработка";
-let headerBackRus = "Backend разработка";
-let headerFormRus = "Форма сообщений";
-
-let headerCEng = "Server in С";
-let headerFrontEng = "Frontend development";
-let headerBackEng = "Backend development";
-let headerFormEng = "Message form";
-
-
-let introRus = `Я - Михаил Колядин, инженер программного обеспечения и будущий архитектор ПО ). 
-Это мой сайт-резюме, отправленный вам домашним сервером, написанном на языке C в августе 2022. 
-Сервер использует только стандартные библиотеки пакета GCC.`;
-let aboutMeRus = `Обо мне: люблю спорт, программирование, коммандную работу и самореализацию
-Чему я учусь: архитектура компьютера, сети, язык C
-Подробное резюме: <a target="_blank">Рус</a>/<a target="_blank">Англ</a>`;
-let lookoutRus = `Проект, который я ищу
-- предпочтительный стэк: C/C#/.Net, Java/Spring
-- предпочтительная область: телеком, сети`;
-let contactsRus = `Спасибо за ваше внимание! 
-Буду рад обсудить любые идеи и предложения:
-почта 2surfingbirds@gmail.com
-телеграм <a href="https://t.me/MikeFlow108" target="_blank">@MikeFlow108</a>
-`;
-
-let introEng = `I’m Mike Kolyadin, a software engineer and wannabe software architect.
-This is my resume-page, sent to you by home-server coded in C language in August 2022.
-This server utilizes only the standard GCC libraries.`;
-let aboutMeEng = `About me: love for sports, programming, teamwork and self-realization
-My everyday studies: computer architecture, networks, c language
-Detailed resume: <a target="_blank">Rus</a>/<a target="_blank">Eng</a>`;
-let lookoutEng = `Next project lookout
-- preferable stacks: C/C#/.Net/ , Java/Spring
-- preferable field: telecom, networks`;
-let contactsEng = `Thanks for your attention! 
-Please, feel free to reach out:
-email 2surfingbirds@gmail.com
-telegram <a href="https://t.me/MikeFlow108" target="_blank">@MikeFlow108</a>
-`;
-
-
-let serverRus = `Возможности
-- HTTP, парсинг запросов
-- HTTP, создание ответов
-- Отправка файлов
-- LRU кэш файлов
-    - кэш таблица и связанный список
-    - срок годности кэш-файлов
-- Многопоточность (pthread.h), блокировка файлов и чистка памяти
-- Сообщения, парсинг UTF-8 и обогащение
-
-Страницы
-- <a href="/index.html" target="_blank">/index.html</a>
-    - также открывается в <a href="/" target="_blank">корне сайта /</a>
-    - <a href="#headerForm">форма сообщений</a>
-- <a href="/comments.html" target="_blank">/comments.html</a>, база сообщений
-- <a href="/d20" target="_blank">/d20</a> api, генерация случайного числа 0-20
-- <a href="/myip" target="_blank">/myip</a> api, вывод ip адреса пользователя`;
-
-let serverEng = `Capabilities
-- HTTP, request parser
-- HTTP, response builder
-- File serving
-- LRU file cache
-    - hash table and double-linked list
-    - cache files expiration
-- Multithreading (pthread.h), file blocking and cleanup handler
-- Messaging, UTF-8 decoding and message enrichment
-
-Site pages
-- <a href="/index.html" target="_blank">/index.html</a>
-    - opens as <a href="/" target="_blank">root /</a>
-    - <a href="#headerForm" >message form</a>
-- <a href="/comments.html" target="_blank">/comments.html</a>, message base
-- <a href="/d20" target="_blank">/d20</a> api, generates random number
-- <a href="/myip" target="_blank">/myip</a> api, sends user's IP`;
-
-
-let backendToolsRus = `Backend инструменты
-- C
-- Python, Django
-- SQL, PostGre, OracleDB, MySQL
-- Unix systems, Windows 10, Docker
-- IBM Software, Omnibus, Jazz
-- и подобные`;
-let backendCommRus = `Backend, коммерческие проекты
-- проекты по насыщению данных от систем и пользователя, созданию записей в базе данных, передаче потока следующему приложению
-- сервис чтения писем из корпоративных ящиков MS Exchange, парсинга содержания и создания записей/аварий в системе IBM Fault Management
-- backend для карты сети, со статистикой аварий. круглосуточная трансляция на видеостене заказчика. кэширование и преобразования данных между базами, сбор данных в приложение, вычисление статистики оп городам и регионам, общие суммы.`;
-let backendTrainRus = `Backend, <a href="https://github.com/Mike2142/cs50web" target="_blank">учебные проекты</a> (2020)`;
-
-
-let backendToolsEng = `Backend tools
-- C
-- Python, Django
-- SQL, PostGre, OracleDB, MySQL
-- Unix systems, Windows 10, Docker
-- IBM Software, Omnibus, Jazz
-- etc.`;
-let backendCommEng = `Backend, commercial projects
-- various projects for enriching data with info collected from other systems and from user input, and sending it further to db or next backend app
-- service to read emails from MS Exchange, parse them and generate alerts to IBM Fault Management system
-- statistics map (backend), fetching and calculating realtime equipment statistics, by city, region or sum. For further rendering on schematic country map, shown on wall-mounted tv-panels`;
-let backendTrainEng = `Backend, <a href="https://github.com/Mike2142/cs50web" target="_blank">training projects</a> (2020)`;
-
-
-let frontendToolsRus = `Frontend инструменты
-- JavaScript, RxJs, Angular
-- CSS, SCSS, SASS, Less, Stylus
-- HTML, Nunjucks
-- npm, и другие`;
-let frontendCommRus = `Frontend, коммерческие проекты
-- spa приложение, меню и формы для парсинга и обогащения сетевых аварий, и отправки данных для дальнейшего использования
-- географическая карта сети
-    - отображние данных в реальном времени 
-    - точки установки оборудования
-    - интерактивная таблица аварий
-    - навигация по карте, вручную и переход к аварии из таблицы
-    - разработано для круглосуточной трансляции на видео-панелях
-- карта статистика сети, состояние оборудования в реальном времени, общие данные по городам, регионам и суммам. Визуализация на схематической карте страны, трансляция на видео-панели
-- spa приложение. Интерактивные графики по трафику, ошибкам и состоянию оборудования. 
-- SaaS платформа, SEO оптимизация сайтов`;
-let frontendTrainRus = `Frontend, <a href="https://github.com/Mike2142/Demo" target="_blank">учебные проекты</a> (2019)`;
-
-
-let frontendToolsEng = `Frontend tools
-- JavaScript, RxJs, Angular
-- CSS, SCSS, SASS, Less, Stylus
-- HTML, Nunjucks
-- npm, etc.`;
-let frontendCommEng = `Frontend, commercial projects
-- spa, browser menus and forms for parsing and enriching network alerts, and sending them for further usage
-- gis map
-    - realtime data 
-    - equipment locations
-    - interactive alerts table
-    - map navigation
-    - developed for realtime monitoring on wall-mounted tv-panels
-- statistics-map (frontend), realtime equipment statistics, shown by city, region or sum. Rendered on schematic country map and shown on wall-mounted tv-panels
-- spa, charts interfaces (2 projects), equipment statistics monitoring, interactive charts and equipment data
-- SaaS platform for SEO optimization`;
-let frontendTrainEng = `Frontend, <a href="https://github.com/Mike2142/Demo" target="_blank">training projects</a> (2019)`;
-
-
-// Define the language reload anchors
-var language = {
-    rus: {
-        nav: navRus,
-
-        header: "Привет мир!",
-        headerC: headerCRus,
-        headerBack: headerBackRus,
-        headerFront: headerFrontRus,
-        headerForm: headerFormRus,
-
-        name: "Имя",
-        comment: "Сообщение",
-        submit: "Отправить",
-        resumeRus: "Рус",
-        resumeEng: "Англ",
-
-        intro: introRus,
-        aboutMe: aboutMeRus,
-        lookout: lookoutRus,
-        contacts: contactsRus,
-
-        server: serverRus,
-        backendTools: backendToolsRus,
-        backendComm: backendCommRus,
-        backendTrain: backendTrainRus,
-
-        frontendTools: frontendToolsRus,
-        frontendComm: frontendCommRus,
-        frontendTrain: frontendTrainRus,
-    },
-    eng: {
-        nav: navEng,
-
-        header: "Hi world!",
-        headerC: headerCEng,
-        headerBack: headerBackEng,
-        headerFront: headerFrontEng,
-        headerForm: headerFormEng,
-
-        name: "Name",
-        comment: "Message",
-        submit: "Submit",
-        resumeRus: "Rus",
-        resumeEng: "Eng",
-
-        intro: introEng,
-        aboutMe: aboutMeEng,
-        lookout: lookoutEng,
-        contacts: contactsEng,
-
-        server: serverEng,
-        backendTools: backendToolsEng,
-        backendComm: backendCommEng,
-        backendTrain: backendTrainEng,
-
-        frontendTools: frontendToolsEng,
-        frontendComm: frontendCommEng,
-        frontendTrain: frontendTrainEng,
-    },
-};
-
+if (window.location.hash) {
+    let initLang = window.location.hash;
+    let inL = initLang.slice(1);
+    changeLanguage(inL);
+}

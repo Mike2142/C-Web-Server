@@ -8,6 +8,10 @@ body {
     font-family: Tinos, 'Times New Roman', Times, serif, serif;
 }
 
+button {
+    cursor: pointer;
+}
+
 .topbar {
     display: block; 
     position: fixed; 
@@ -58,4 +62,24 @@ color: #330000;
 
 a {
 color: blue;
+}
+
+form {
+    padding: 0 0 40px 0;
+}
+
+form label {
+    display: block;
+    padding-top: 10px;
+}
+
+form input {
+    display: block;
+    margin-top: 10px;
+}
+
+form input:last-child {
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 20px;
 }
