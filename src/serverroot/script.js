@@ -3,13 +3,15 @@ let navRus = `<a href="#header">Вступление</a>
 <a href="#headerC">Сервер</a>
 <a href="#headerBack">Backend</a>
 <a href="#headerFront">Frontend</a>
-<a href="#headerForm">Сообщения</a>`;
+<a href="#headerForm">Сообщения</a>
+<a href="#contacts">Контакты</a>`;
 
 let navEng = `<a href="#header">Intro</a>
 <a href="#headerC">Server</a>
 <a href="#headerBack">Backend</a>
 <a href="#headerFront">Frontend</a>
-<a href="#headerForm">Messages</a>`;
+<a href="#headerForm">Messages</a>
+<a href="#contacts">Contacts</a>`;
 
 let headerCRus = "Сервер С";
 let headerFrontRus = "Frontend разработка";
@@ -27,7 +29,8 @@ let introRus = `Я - Михаил Колядин, инженер програм�
 Сервер использует только стандартные библиотеки пакета GCC.`;
 let aboutMeRus = `Обо мне: люблю спорт, программирование, коммандную работу и самореализацию
 Чему я учусь: архитектура компьютера, сети, язык C
-Подробное резюме: <a target="_blank">Рус</a>/<a target="_blank">Англ</a>`;
+Подробное резюме: <a id="resumeRus" href="https://drive.google.com/file/d/1k5UUy1Xt8HiYsvXqLmvcXGEnmrsIP9Dg/view?usp=sharing" target="_blank">Рус</a>/<a id="resumeEng" href="https://drive.google.com/file/d/1ygn1ZqbZa7yCTB44Cve_eqtzwRBoOHR4/view?usp=sharing" target="_blank">Англ</a>
+`;
 let lookoutRus = `Проект, который я ищу
 - предпочтительный стэк: C/C#/.Net, Java/Spring
 - предпочтительная область: телеком, сети`;
@@ -43,7 +46,8 @@ This is my resume-page, sent to you by home-server coded in C language in August
 This server utilizes only the standard GCC libraries.`;
 let aboutMeEng = `About me: love for sports, programming, teamwork and self-realization
 My everyday studies: computer architecture, networks, c language
-Detailed resume: <a target="_blank">Rus</a>/<a target="_blank">Eng</a>`;
+Detailed resume: <a id="resumeRus" href="https://drive.google.com/file/d/1k5UUy1Xt8HiYsvXqLmvcXGEnmrsIP9Dg/view?usp=sharing" target="_blank">Rus</a>/<a id="resumeEng" href="https://drive.google.com/file/d/1ygn1ZqbZa7yCTB44Cve_eqtzwRBoOHR4/view?usp=sharing" target="_blank">Eng</a>
+`;
 let lookoutEng = `Next project lookout
 - preferable stacks: C/C#/.Net/ , Java/Spring
 - preferable field: telecom, networks`;
@@ -70,8 +74,12 @@ let serverRus = `Возможности
     - также открывается в <a href="/" target="_blank">корне сайта /</a>
     - <a href="#headerForm">форма сообщений</a>
 - <a href="/comments.html" target="_blank">/comments.html</a>, база сообщений
-- <a href="/d20" target="_blank">/d20</a> api, генерация случайного числа 0-20
-- <a href="/myip" target="_blank">/myip</a> api, вывод ip адреса пользователя`;
+- <a href="/d20" target="_blank">/d20</a> api, генерирует случайное число 0-20
+- <a href="/myip" target="_blank">/myip</a> api, отправляет ip адрес пользователя
+
+исходный код <a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">ссылка</a>
+основа проекта <a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">ссылка</a>
+`;
 
 let serverEng = `Capabilities
 - HTTP, request parser
@@ -89,7 +97,11 @@ Site pages
     - <a href="#headerForm" >message form</a>
 - <a href="/comments.html" target="_blank">/comments.html</a>, message base
 - <a href="/d20" target="_blank">/d20</a> api, generates random number
-- <a href="/myip" target="_blank">/myip</a> api, sends user's IP`;
+- <a href="/myip" target="_blank">/myip</a> api, sends user's IP
+
+source code <a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">link</a>
+based on <a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">link</a>
+`;
 
 
 let backendToolsRus = `Backend инструменты
@@ -100,10 +112,10 @@ let backendToolsRus = `Backend инструменты
 - IBM Software, Omnibus, Jazz
 - и подобные`;
 let backendCommRus = `Backend, коммерческие проекты
-- проекты по насыщению данных от систем и пользователя, созданию записей в базе данных, передаче потока следующему приложению
-- сервис чтения писем из корпоративных ящиков MS Exchange, парсинга содержания и создания записей/аварий в системе IBM Fault Management
-- backend для карты сети, со статистикой аварий. круглосуточная трансляция на видеостене заказчика. 
-  кэширование и преобразования данных между базами, сбор данных в приложение, вычисление статистики по городам и регионам, общие суммы.`;
+- проекты по насыщению данных от систем и пользователя, наполнение базы данных, передача потока следующему приложению
+- сбор писем из ящиков MS Exchange, парсинг содержания и создание записей/аварий в системе IBM Fault Management
+- backend для интерактивной карты сети, со статистикой аварий. кэширование и преобразования данных между базами, 
+  вычисление статистики по городам и регионам, общие суммы. круглосуточная трансляция на видеостене заказчика. `;
 let backendTrainRus = `Backend, <a href="https://github.com/Mike2142/cs50web" target="_blank">учебные проекты</a> (2020)`;
 
 
@@ -115,7 +127,8 @@ let backendToolsEng = `Backend tools
 - IBM Software, Omnibus, Jazz
 - etc.`;
 let backendCommEng = `Backend, commercial projects
-- various projects for enriching data with info collected from other systems and from user input, and sending it further to db or next backend app
+- various projects for enriching data with info collected from other systems and from user input, 
+  and sending it further to db or next backend app
 - service to read emails from MS Exchange, parse them and generate alerts to IBM Fault Management system
 - statistics map (backend), fetching and calculating realtime equipment statistics, by city, region or sum. 
   for further rendering on schematic country map, shown on wall-mounted tv-panels`;
@@ -128,7 +141,8 @@ let frontendToolsRus = `Frontend инструменты
 - HTML, Nunjucks
 - npm, и другие`;
 let frontendCommRus = `Frontend, коммерческие проекты
-- spa приложение, меню и формы для парсинга и обогащения сетевых аварий, и отправки данных для дальнейшего использования
+- spa приложение, меню и формы для парсинга и обогащения сетевых аварий, 
+  отправка данных для дальнейшего использования
 - географическая карта сети
     - отображние данных в реальном времени 
     - точки установки оборудования

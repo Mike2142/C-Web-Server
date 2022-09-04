@@ -43,7 +43,7 @@ color: gainsboro;
 color: #330000;
 }
 
-h2::before { 
+h2::before, #contacts::before { 
     display: block; 
     content: " "; 
     margin-top: -85px; 
@@ -71,6 +71,10 @@ form {
 form label {
     display: block;
     padding-top: 10px;
+}
+
+form label:first-child {
+    padding-top: 0;
 }
 
 form input {
