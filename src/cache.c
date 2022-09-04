@@ -72,7 +72,7 @@ void dllist_move_to_head(struct cache *cache, struct cache_entry *ce)
 }
 
 void dllist_remove(struct cache *cache, struct cache_entry *ce)
-{   
+{      
     if (cache->head == cache->tail) {
         // if 1 entry 
         cache->head = NULL;
@@ -83,9 +83,10 @@ void dllist_remove(struct cache *cache, struct cache_entry *ce)
         cache->head = ce->next;
         cache->head->prev = NULL;
     } 
-    else if (ce->next == NULL) {
+    else if (ce == cache->tail) {
         // if tail
-        ce->prev->next = ce->next;
+        cache->tail = ce->prev;
+        cache->tail->next = NULL;
     } 
     else {
         // if middle

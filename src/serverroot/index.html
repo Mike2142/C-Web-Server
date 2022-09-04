@@ -10,44 +10,33 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    
+  
+  <link rel="stylesheet" href="styles.css">
   <script src="script.js"></script>
 
-  <style>
-    body {
-      padding: 20px;
-      margin: 0;
-      font-family: Tinos, 'Times New Roman', Times, serif, serif;
-    }
-
-    h2 {
-      color: rgb(210, 206, 200);
-      color: gainsboro;
-      color: #330000;
-    }
-
-    p {
-      white-space: pre;
-      font-size: 17px;
-      color: rgb(210, 206, 200);
-      color: gainsboro;
-      color: #330000;
-    }
-
-    a {
-      color: blue;
-    }
-  </style>
 
 </head>
 
 <body>
-  <button onclick="changeLanguage('rus')">
-    Change to Russian
-  </button>
-  <button onclick="changeLanguage('eng')">
-    Change to English
-  </button>
+  <div class="topbar">
+    <button onclick="changeLanguage('rus')">
+      Russian version
+    </button>
+    <button onclick="changeLanguage('eng')">
+      English version
+    </button>
+    
+    <span id="nav">
+      <a href="#header">Вступление</a>
+      <a href="#headerC">Сервер</a>
+      <a href="#headerBack">Backend</a>
+      <a href="#headerFront">Frontend</a>
+      <a href="#headerForm">Сообщения</a>
+    </span>
+
+  </div>
+
+  <div class="content-wrap">
 
   <h2 id="header">
     Привет мир!
@@ -59,7 +48,7 @@
 
 <p id="aboutMe">Обо мне: люблю спорт, программирование, коммандную работу и самореализацию
 Чему я учусь: архитектура компьютера, сети, язык C
-Подробное резюме: <a id="resumeRus">Рус</a>/<a id="resumeEng">Англ</a>
+Подробное резюме: <a id="resumeRus" target="_blank">Рус</a>/<a id="resumeEng" target="_blank">Англ</a>
 </p>
 
 <p id="lookout">Проект, который я ищу
@@ -67,28 +56,34 @@
 - предпочтительная область: телеком, сети
 </p>
 
-<h2 id="">
+<p id="contacts">Спасибо за ваше внимание! 
+Буду рад обсудить любые идеи и предложения:
+почта 2surfingbirds@gmail.com
+телеграм <a href="https://t.me/MikeFlow108" target="_blank">@MikeFlow108</a></p>
+
+<h2 id="headerC">
   Сервер С
 </h2>
-<p id="server">О сервере C, возможности
+<p id="server">Возможности
 - HTTP, парсинг запросов
 - HTTP, создание ответов
 - Отправка файлов
 - LRU кэш файлов
-  - кэш таблица и связанный список
-  - срок годности кэш-файлов
+    - кэш таблица и связанный список
+    - срок годности кэш-файлов
 - Многопоточность (pthread.h), блокировка файлов и чистка памяти
+- Сообщения, парсинг UTF-8 и обогащение
 
-О сервере C, страницы
-- <a>/index.html</a>
-  - также открывается в <a>корне сайта /</a>
-  - <a>форма сообщений</a>
-- <a>/comments.html</a>, база сообщений
-- <a>/d20</a> api, генерация случайного числа 0-20
-- <a>/myip</a> api, вывод ip адреса пользователя
+Страницы
+- <a href="/index.html" target="_blank">/index.html</a>
+    - также открывается в <a href="/" target="_blank">корне сайта /</a>
+    - <a href="#headerForm">форма сообщений</a>
+- <a href="/comments.html" target="_blank">/comments.html</a>, база сообщений
+- <a href="/d20" target="_blank">/d20</a> api, генерация случайного числа 0-20
+- <a href="/myip" target="_blank">/myip</a> api, вывод ip адреса пользователя
 </p>
 
-<h2 id="">
+<h2 id="headerBack">
   Backend разработка
 </h2>
 <p id="backendTools">Backend инструменты
@@ -97,20 +92,20 @@
 - SQL, PostGre, OracleDB, MySQL
 - Unix systems, Windows 10, Docker
 - IBM Software, Omnibus, Jazz
-- etc.
+- и подобные
 </p>
 
 <p id="backendComm">Backend, коммерческие проекты
-- various projects for enriching data with info collected from other systems and from user input, and sending it further to db or next backend app
-- service to read emails from MS Exchange, parse them and generate alerts to IBM Fault Management system
-- statistics map (backend), fetching and calculating realtime equipment statistics, by city, region or sum. For further rendering on schematic country map, shown on wall-mounted tv-panels
+- проекты по насыщению данных от систем и пользователя, созданию записей в базе данных, передаче потока следующему приложению
+- сервис чтения писем из корпоративных ящиков MS Exchange, парсинга содержания и создания записей/аварий в системе IBM Fault Management
+- backend для карты сети, со статистикой аварий. круглосуточная трансляция на видеостене заказчика. кэширование и преобразования данных между базами, сбор данных в приложение, вычисление статистики оп городам и регионам, общие суммы. 
 </p>
 
-<p id="backendTrain">Backend, <a>учебные проекты</a> (2020)
+<p id="backendTrain">Backend, <a href="https://github.com/Mike2142/cs50web" target="_blank">учебные проекты</a> (2020)
 </p>
 
 
-<h2 id="">
+<h2 id="headerFront">
   Frontend разработка
 </h2>
 
@@ -122,22 +117,22 @@
 </p>
 
 <p id="frontendComm">Frontend, коммерческие проекты
-- spa, browser menus and forms for parsing and enriching network alerts, and sending them for further usage
-- gis map
-    - realtime data 
-    - equipment locations
-    - interactive alerts table
-    - map navigation
-    - developed for realtime monitoring on wall-mounted tv-panels
-- statistics-map (frontend), realtime equipment statistics, shown by city, region or sum. Rendered on schematic country map and shown on wall-mounted tv-panels
-- spa, charts interfaces (2 projects), equipment statistics monitoring, interactive charts and equipment data
-- SaaS platform for SEO optimization
+- spa приложение, меню и формы для парсинга и обогащения сетевых аварий, и отправки данных для дальнейшего использования
+- географическая карта сети
+    - отображние данных в реальном времени 
+    - точки установки оборудования
+    - интерактивная таблица аварий
+    - навигация по карте, вручную и переход к аварии из таблицы
+    - разработано для круглосуточной трансляции на видео-панелях
+- карта статистика сети, состояние оборудования в реальном времени, общие данные по городам, регионам и суммам. Визуализация на схематической карте страны, трансляция на видео-панели
+- spa приложение. Интерактивные графики по трафику, ошибкам и состоянию оборудования. 
+- SaaS платформа, SEO оптимизация сайтов
 </p>
 
-<p id="frontendTrain">Frontend, <a>учебные проекты</a> (2019)
+<p id="frontendTrain">Frontend, <a href="https://github.com/Mike2142/Demo" target="_blank">учебные проекты</a> (2019)
 </p>
 
-<h2 id="">
+<h2 id="headerForm">
   Форма сообщений
 </h2>
 
@@ -151,6 +146,7 @@
     <input type="submit" id="submitBtn" value="Отправить">
   </form>
 
+</div>
 
 </body>
 

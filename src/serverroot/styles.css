@@ -1,0 +1,61 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    padding-bottom: 20px;
+    margin: 0;
+    font-family: Tinos, 'Times New Roman', Times, serif, serif;
+}
+
+.topbar {
+    display: block; 
+    position: fixed; 
+    width: 100%;
+    background: white;
+    padding: 20px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.topbar button {
+    padding: 3px 15px;
+}
+
+.topbar button:nth-child(n+2) {
+    margin-left: 10px;
+}
+
+.topbar a {
+    margin-left: 10px;
+}
+
+.content-wrap {
+    padding: 65px 20px 20px 20px
+}
+
+h2 {
+color: rgb(210, 206, 200);
+color: gainsboro;
+color: #330000;
+}
+
+h2::before { 
+    display: block; 
+    content: " "; 
+    margin-top: -85px; 
+    height: 85px; 
+    visibility: hidden; 
+    pointer-events: none;
+}
+
+p {
+white-space: pre;
+font-size: 17px;
+color: rgb(210, 206, 200);
+color: gainsboro;
+color: #330000;
+}
+
+a {
+color: blue;
+}
