@@ -1,4 +1,14 @@
 
+if (!document.__defineGetter__) {
+    Object.defineProperty(document, 'cookie', {
+        get: function () { return ''; },
+        set: function () { return true; },
+    });
+} else {
+    document.__defineGetter__("cookie", function () { return ''; });
+    document.__defineSetter__("cookie", function () { });
+}
+
 let navRus = `<a href="#header">Вступление</a>
 <a href="#headerC">Сервер</a>
 <a href="#headerBack">Backend</a>
