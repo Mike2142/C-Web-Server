@@ -212,7 +212,12 @@ void post_save(int fd, char *request, char *body, int bodylen)
     name = strtok(body, "&");
     comment = strtok(NULL, "&");
 
+    // extract values
+    sscanf(name, "%*5s%s", name_val);
+    sscanf(comment, "%*8s%s", comment_val);
+
     // strtok() fix, DLE symbol
+    int namelen = strlen(name_val);
     int comlen = strlen(comment_val);    
     int secval = (int)comment_val[1];
 
@@ -220,9 +225,9 @@ void post_save(int fd, char *request, char *body, int bodylen)
         comment_val[1] = '\0';
     }
 
-    // extract values
-    sscanf(name, "%*5s%s", name_val);
-    sscanf(comment, "%*8s%s", comment_val);
+    if (!namelen || !comlen) {
+        return;
+    }
 
     // decode utf to char
     urldecode2(name_val, name_val);
@@ -322,13 +327,17 @@ void handle_http_request(struct handler_args *args)
     if ((index0_flag || index1_flag) && (post0_flag || post1_flag || post2_flag)) {
         int sob = find_start_of_body(request, bytes_recvd);
         int bodylen = bytes_recvd - sob;
-        
-        char body[bodylen];
-        strncpy(body, request+sob, bodylen);
-        body[bodylen] = '\0';
 
-        post_save(fd, request, body, bodylen);
-        get_file(fd, cache, "/comments.html");
+        if (bodylen) {
+            char body[bodylen];
+            strncpy(body, request+sob, bodylen);
+            body[bodylen] = '\0';
+
+            post_save(fd, request, body, bodylen);
+            get_file(fd, cache, "/comments.html");
+        } else {
+            fprintf(stderr, "no body in request");
+        }
     }
 
     pthread_cleanup_pop(1);
