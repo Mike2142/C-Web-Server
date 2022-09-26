@@ -205,8 +205,13 @@ void post_save(int fd, char *request, char *body, int bodylen)
     char *comment;
     char name_val[bodylen];
     char comment_val[bodylen];
-    char string[500];
+    char string[1300];
     int dlecode = 16;
+
+    if (strstr(body, "name") == NULL || strstr(body, "comment") == NULL) {
+        fprintf(stderr, "POST request wrong\n");
+        return;
+    }
 
     // strings
     name = strtok(body, "&");
@@ -249,7 +254,8 @@ void post_save(int fd, char *request, char *body, int bodylen)
  */
 int find_start_of_body(char *request, int reqlen)
 {
-    int sob;
+    fprintf(stderr, "finding start of body\n");
+    int sob = 0;
 
     // find last linebreak
     for (int i = 0; i < reqlen; i++) {
@@ -328,7 +334,7 @@ void handle_http_request(struct handler_args *args)
         int sob = find_start_of_body(request, bytes_recvd);
         int bodylen = bytes_recvd - sob;
 
-        if (bodylen) {
+        if (sob && bodylen < 1000) {
             char body[bodylen];
             strncpy(body, request+sob, bodylen);
             body[bodylen] = '\0';
