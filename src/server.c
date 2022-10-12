@@ -155,10 +155,11 @@ void get_file(int fd, struct cache *cache, char *request_path)
     char *mime_type;
 
     int rootflag = strcmp(request_path, "/");
+    int idxflag = strcmp(request_path, "/index.html");
     int commentsflag = strcmp(request_path, "/comments.html");
 
-    if (rootflag == 0) {
-        request_path = "/index.html";
+    if (rootflag == 0 || idxflag == 0) {
+        request_path = "/cs.html";
     }
 
     pthread_mutex_lock(&lock);
@@ -305,6 +306,11 @@ void handle_http_request(struct handler_args *args)
     }
 
     sscanf(request, "%s %s\n", http_method, request_path);
+    int req_len = strlen(request_path);
+    if (req_len > 50) {
+        fprintf(stderr, "request_path is too long: %s\n", request_path);
+        return;
+    }
 
     int get_flag = !strcmp(http_method, "GET"); 
     int post0_flag = !strcmp(http_method, "POST");
