@@ -1,0 +1,5 @@
+http://www.mkolyadin.ru/
+http://www.mkolyadin.ru/server.html
+http://www.mkolyadin.ru/proj-asp.html
+http://www.mkolyadin.ru/proj-core-ng.html
+http://www.mkolyadin.ru/proj-core-xunit.html
