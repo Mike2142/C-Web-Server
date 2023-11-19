@@ -301,14 +301,24 @@ void handle_http_request(struct handler_args *args)
     int bytes_recvd = recv(fd, request, request_buffer_size - 1, 0);
 
     if (bytes_recvd <= 0) {
-        perror("recv");
+        fprintf(stderr, "No bytes received.\n");
+        fprintf(stderr, "Closing connection.\n\n");
         return;
     }
 
     sscanf(request, "%s %s\n", http_method, request_path);
+    int method_len = strlen(http_method);
     int req_len = strlen(request_path);
-    if (req_len > 50) {
+
+    if (method_len > 25) {
+        fprintf(stderr, "http_method is too long: %s\n", http_method);
+        fprintf(stderr, "Closing connection.\n\n");
+        return;
+    }
+
+    if (req_len > 30) {
         fprintf(stderr, "request_path is too long: %s\n", request_path);
+        fprintf(stderr, "Closing connection.\n\n");
         return;
     }
 
@@ -328,16 +338,21 @@ void handle_http_request(struct handler_args *args)
     fprintf(stderr, "request_path: %s\n", request_path);
 
     if (d20_flag)  {
+        fprintf(stderr, "GET d20 sequence started.\n");
         get_d20(fd);
     }
     else if (myip_flag) {
+        fprintf(stderr, "GET myip sequence started.\n");
         get_ip(fd, ipaddr);
     }
     else if (get_flag) {
+        fprintf(stderr, "GET sequence started.\n");
         get_file(fd, cache, request_path);
     }
 
     if ((index0_flag || index1_flag || server_flag) && (post0_flag || post1_flag || post2_flag || post3_flag)) {
+        fprintf(stderr, "POST sequence started.\n");
+
         int sob = find_start_of_body(request, bytes_recvd);
         int bodylen = bytes_recvd - sob;
 
@@ -349,10 +364,12 @@ void handle_http_request(struct handler_args *args)
             post_save(fd, request, body, bodylen);
             get_file(fd, cache, "/comments.html");
         } else {
-            fprintf(stderr, "no body in request");
+            fprintf(stderr, "No body in request.\n");
         }
     }
 
+    fprintf(stderr, "Closing connection.\n");
+    fprintf(stderr, "Manual cleanup.\n\n");
     pthread_cleanup_pop(1);
     return;
 }
