@@ -303,6 +303,7 @@ void handle_http_request(struct handler_args *args)
     if (bytes_recvd <= 0) {
         fprintf(stderr, "No bytes received.\n");
         fprintf(stderr, "Closing connection.\n\n");
+        close_conn(args);
         return;
     }
 
@@ -313,12 +314,14 @@ void handle_http_request(struct handler_args *args)
     if (method_len > 25) {
         fprintf(stderr, "http_method is too long: %s\n", http_method);
         fprintf(stderr, "Closing connection.\n\n");
+        close_conn(args);
         return;
     }
 
     if (req_len > 30) {
         fprintf(stderr, "request_path is too long: %s\n", request_path);
         fprintf(stderr, "Closing connection.\n\n");
+        close_conn(args);
         return;
     }
 
@@ -369,7 +372,6 @@ void handle_http_request(struct handler_args *args)
     }
 
     fprintf(stderr, "Closing connection.\n");
-    fprintf(stderr, "Manual cleanup.\n\n");
     pthread_cleanup_pop(1);
     return;
 }
