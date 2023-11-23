@@ -318,7 +318,7 @@ void handle_http_request(struct handler_args *args)
         return;
     }
 
-    if (req_len > 30) {
+    if (req_len > 50) {
         fprintf(stderr, "request_path is too long: %s\n", request_path);
         fprintf(stderr, "Closing connection.\n\n");
         close_conn(args);
