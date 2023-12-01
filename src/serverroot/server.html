@@ -13,33 +13,37 @@
   <div class="content-wrap">
 
 <h2 id="headerC">
-  Сервер С
+  Сервер С.
 </h2>
-<p>Сервер написан на языке C и использует только стандартные библиотеки пакета GCC.</p>
+<p>Сервер написан мной на языке C. Подключены стандартные библиотеки пакета GCC.</p>
 <p>Сервер работает из VMware Centos 7, на базе MacOS.</p>
-<p id="server">Возможности
-- HTTP, парсинг запросов
-- HTTP, создание ответов
-- Отправка файлов
-- LRU кэш файлов
-    - хэш таблица и связанный список
-    - срок годности кэш-файлов
-- Многопоточность (pthread.h), блокировка файлов и чистка памяти
-- Сообщения, парсинг UTF-8 и обогащение
-- Защита от атак
+<h2 id="headerServer">
+    Функционал сервера.
+</h2>
+<p id="server">- HTTP. Парсинг запросов и создание ответов.
+- Отправка файлов.
+- LRU кэш файлов.
+    - Хэш таблица и связанный список.
+    - Срок годности кэш-файлов.
+- Многопоточность (pthread.h). Блокировка файлов и чистка памяти.
+- Сообщения клиента через форму связи. Парсинг UTF-8 и обогащение.
+- Защита от атак. Фильтрация запросов.
+- Почтовый сервер.
+</p>
+<h2 id="headerInteraction">
+    Интерактивность.
+</h2>
+<p>- <a href="#headerForm">Форма сообщений.</a>
+- База сообщений <a href="/comments.html" target="_blank">/comments.html</a>.
+- Api. Генерирует случайное число 0-20 <a href="/d20" target="_blank">/d20</a>.
+- Api. Отправляет ip адрес пользователя <a href="/myip" target="_blank">/myip</a>.
 
-Интерактивность
-- <a href="#headerForm">форма сообщений</a>
-- <a href="/comments.html" target="_blank">/comments.html</a>, база сообщений
-- <a href="/d20" target="_blank">/d20</a> api, генерирует случайное число 0-20
-- <a href="/myip" target="_blank">/myip</a> api, отправляет ip адрес пользователя
-
-исходный код <a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">ссылка</a>
-основа проекта <a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">ссылка</a>
+<a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">Исходный код.</a>
+<a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">Основа проекта.</a>
 </p>
 
 <h2 id="headerForm">
-    Форма сообщений
+    Форма сообщений.
 </h2> 
   
 <form method="POST">
