@@ -45,7 +45,7 @@
 
 struct handler_args {
     int fd;
-    void *cache;
+    struct cache *cache;
     char *socket;
 };
 
@@ -159,7 +159,7 @@ void get_file(int fd, struct cache *cache, char *request_path)
     int commentsflag = strcmp(request_path, "/comments.html");
 
     if (rootflag == 0 || idxflag == 0) {
-        request_path = "/cs.html";
+        request_path = "/fullstack-python.html";
     }
 
     pthread_mutex_lock(&lock);
@@ -298,13 +298,12 @@ void handle_http_request(struct handler_args *args)
     char request_path[30];
 
     // Read request
+    int isProperRequest = 1;
     int bytes_recvd = recv(fd, request, request_buffer_size - 1, 0);
 
     if (bytes_recvd <= 0) {
         fprintf(stderr, "No bytes received.\n");
-        fprintf(stderr, "Closing connection.\n\n");
-        close_conn(args);
-        return;
+        isProperRequest = 0;
     }
 
     sscanf(request, "%s %s\n", http_method, request_path);
@@ -313,65 +312,63 @@ void handle_http_request(struct handler_args *args)
 
     if (method_len > 25) {
         fprintf(stderr, "http_method is too long: %s\n", http_method);
-        fprintf(stderr, "Closing connection.\n\n");
-        close_conn(args);
-        return;
+        isProperRequest = 0;
     }
 
     if (req_len > 50) {
         fprintf(stderr, "request_path is too long: %s\n", request_path);
-        fprintf(stderr, "Closing connection.\n\n");
-        close_conn(args);
-        return;
+        isProperRequest = 0;
     }
 
-    int get_flag = !strcmp(http_method, "GET"); 
-    int post0_flag = !strcmp(http_method, "POST");
-    int post1_flag = !strcmp(http_method, "POST/");
-    int post2_flag = !strcmp(http_method, "POST/index.html"); 
-    int post3_flag = !strcmp(http_method, "POST/server.html");
+    if (isProperRequest) {
+        int get_flag = !strcmp(http_method, "GET"); 
+        int post0_flag = !strcmp(http_method, "POST");
+        int post1_flag = !strcmp(http_method, "POST/");
+        int post2_flag = !strcmp(http_method, "POST/index.html"); 
+        int post3_flag = !strcmp(http_method, "POST/server.html");
 
-    int d20_flag = !strcmp(request_path, "/d20");
-    int myip_flag = !strcmp(request_path, "/myip");
-    int index0_flag = !strcmp(request_path, "/");
-    int index1_flag = !strcmp(request_path, "/index.html");
-    int server_flag = !strcmp(request_path, "/server.html");
+        int d20_flag = !strcmp(request_path, "/d20");
+        int myip_flag = !strcmp(request_path, "/myip");
+        int index0_flag = !strcmp(request_path, "/");
+        int index1_flag = !strcmp(request_path, "/index.html");
+        int server_flag = !strcmp(request_path, "/server.html");
 
-    fprintf(stderr, "\nhttp_method: %s\n", http_method);
-    fprintf(stderr, "request_path: %s\n", request_path);
+        fprintf(stderr, "\nhttp_method: %s\n", http_method);
+        fprintf(stderr, "request_path: %s\n", request_path);
 
-    if (d20_flag)  {
-        fprintf(stderr, "GET d20 sequence started.\n");
-        get_d20(fd);
-    }
-    else if (myip_flag) {
-        fprintf(stderr, "GET myip sequence started.\n");
-        get_ip(fd, ipaddr);
-    }
-    else if (get_flag) {
-        fprintf(stderr, "GET sequence started.\n");
-        get_file(fd, cache, request_path);
-    }
-
-    if ((index0_flag || index1_flag || server_flag) && (post0_flag || post1_flag || post2_flag || post3_flag)) {
-        fprintf(stderr, "POST sequence started.\n");
-
-        int sob = find_start_of_body(request, bytes_recvd);
-        int bodylen = bytes_recvd - sob;
-
-        if (sob && bodylen < 1000) {
-            char body[bodylen];
-            strncpy(body, request+sob, bodylen);
-            body[bodylen] = '\0';
-
-            post_save(fd, request, body, bodylen);
-            get_file(fd, cache, "/comments.html");
-        } else {
-            fprintf(stderr, "No body in request.\n");
+        if (d20_flag)  {
+            fprintf(stderr, "GET d20 sequence started.\n");
+            get_d20(fd);
         }
+        else if (myip_flag) {
+            fprintf(stderr, "GET myip sequence started.\n");
+            get_ip(fd, ipaddr);
+        }
+        else if (get_flag) {
+            fprintf(stderr, "GET sequence started.\n");
+            get_file(fd, cache, request_path);
+        }
+
+        if ((index0_flag || index1_flag || server_flag) && (post0_flag || post1_flag || post2_flag || post3_flag)) {
+            fprintf(stderr, "POST sequence started.\n");
+
+            int sob = find_start_of_body(request, bytes_recvd);
+            int bodylen = bytes_recvd - sob;
+
+            if (sob && bodylen < 1000) {
+                char body[bodylen];
+                strncpy(body, request+sob, bodylen);
+                body[bodylen] = '\0';
+
+                post_save(fd, request, body, bodylen);
+                get_file(fd, cache, "/comments.html");
+            } else {
+                fprintf(stderr, "No body in request.\n");
+            }
+        }        
     }
 
-    fprintf(stderr, "Closing connection.\n");
+    fprintf(stderr, "Closing connection.\n\n");
     pthread_cleanup_pop(1);
     return;
 }
