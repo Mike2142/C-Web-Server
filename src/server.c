@@ -159,7 +159,7 @@ void get_file(int fd, struct cache *cache, char *request_path)
     int commentsflag = strcmp(request_path, "/comments.html");
 
     if (rootflag == 0 || idxflag == 0) {
-        request_path = "/fs-python.html";
+        request_path = "/fs-py.html";
     }
 
     pthread_mutex_lock(&lock);
