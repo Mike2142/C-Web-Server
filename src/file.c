@@ -39,6 +39,7 @@ struct file_data *file_load(char *filename)
     p = buffer = malloc(bytes_remaining);
 
     if (buffer == NULL) {
+        fclose(fp);
         return NULL;
     }
 
@@ -46,6 +47,7 @@ struct file_data *file_load(char *filename)
     while (bytes_read = fread(p, 1, bytes_remaining, fp), bytes_read != 0 && bytes_remaining > 0) {
         if (bytes_read == -1) {
             free(buffer);
+            fclose(fp);
             return NULL;
         }
 
@@ -59,6 +61,7 @@ struct file_data *file_load(char *filename)
 
     if (filedata == NULL) {
         free(buffer);
+        fclose(fp);
         return NULL;
     }
 
@@ -66,7 +69,7 @@ struct file_data *file_load(char *filename)
     filedata->size = total_bytes;
 
     // TODO: fclose, redundancy check
-    //fclose(fp);
+    fclose(fp);
 
     return filedata;
 }

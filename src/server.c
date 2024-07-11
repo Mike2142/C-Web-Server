@@ -159,7 +159,7 @@ void get_file(int fd, struct cache *cache, char *request_path)
     int commentsflag = strcmp(request_path, "/comments.html");
 
     if (rootflag == 0 || idxflag == 0) {
-        request_path = "/fs-py.html";
+        request_path = "/fs.html";
     }
 
     pthread_mutex_lock(&lock);
@@ -276,8 +276,9 @@ int find_start_of_body(char *request, int reqlen)
 void close_conn(struct handler_args *args)
 {
     int fd = args->fd;
-    free(args);
     close(fd);
+
+    free(args);
 }
 
 /**
@@ -295,7 +296,7 @@ void handle_http_request(struct handler_args *args)
     int request_buffer_size = 65536; // 64K
     char request[request_buffer_size];
     char http_method[4];
-    char request_path[30];
+    char request_path[50];
 
     // Read request
     int isProperRequest = 1;
@@ -306,19 +307,7 @@ void handle_http_request(struct handler_args *args)
         isProperRequest = 0;
     }
 
-    sscanf(request, "%s %s\n", http_method, request_path);
-    int method_len = strlen(http_method);
-    int req_len = strlen(request_path);
-
-    if (method_len > 25) {
-        fprintf(stderr, "http_method is too long: %s\n", http_method);
-        isProperRequest = 0;
-    }
-
-    if (req_len > 50) {
-        fprintf(stderr, "request_path is too long: %s\n", request_path);
-        isProperRequest = 0;
-    }
+    sscanf(request, "%4s %50s\n", http_method, request_path);
 
     if (isProperRequest) {
         int get_flag = !strcmp(http_method, "GET"); 
@@ -455,9 +444,12 @@ int main(void)
         // listenfd is still listening for new connections.
 
         // prepare http handler
-        struct handler_args *hargs = malloc(sizeof(hargs));
+        struct handler_args *hargs = malloc(sizeof *hargs);
         hargs->fd = newfd;
+        hargs->cache = malloc(sizeof cache);
         hargs->cache = cache;
+
+        hargs->socket = malloc(sizeof s);
         hargs->socket = s;
 
         // create thread
