@@ -157,6 +157,11 @@ void get_file(int fd, struct cache *cache, char *request_path)
     int rootflag = strcmp(request_path, "/");
     int idxflag = strcmp(request_path, "/index.html");
     int commentsflag = strcmp(request_path, "/comments.html");
+    int devopsflag = strcmp(request_path, "/devops");
+
+    if (devopsflag = 0) {
+        request_path = "/devops.html";
+    }
 
     if (rootflag == 0 || idxflag == 0) {
         request_path = "/fs.html";
