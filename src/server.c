@@ -164,7 +164,7 @@ void get_file(int fd, struct cache *cache, char *request_path)
     }
 
     if (rootflag == 0 || idxflag == 0) {
-        request_path = "/fs.html";
+        request_path = "/devops.html";
     }
 
     pthread_mutex_lock(&lock);
