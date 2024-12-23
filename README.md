@@ -15,7 +15,7 @@ kubectl expose deployment hello-minikube --type=NodePort --port=8080
 
 kubectl port-forward --address 0.0.0.0 service/hello-minikube 3491:8080
 
-Настройки роутера:
+Настройки роутера (http://192.168.0.1/):
 
 Доп. настройки -> Переадресация NAT -> Виртуальные серверы
 2	Mkolyadin.ru	80	192.168.0.158	3490	TCP		
