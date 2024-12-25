@@ -30,6 +30,9 @@ kubectl port-forward --address 0.0.0.0 service/hello-minikube 3491:8080
 
 sudo gitlab-ctl reconfigure
 
+## Конструктор Telegram-ботов:
+https://cp.puzzlebot.top/home
+
 ## Настройки роутера:
 
 Внешний адрес роутера: http://46.38.107.141/
