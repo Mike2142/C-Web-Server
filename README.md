@@ -6,8 +6,8 @@ cd src && make && ./server
 
 ## Запуск кластера Kubernetes Minikube:
 
-minikube delete
 minikube start --force
+minikube delete (если не запускается)
 kubectl get po -A
 
 kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0

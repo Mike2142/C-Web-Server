@@ -1,9 +1,4 @@
-@font-face {
-    font-family: "Tinos";
-    src: url('fonts/Tinos-Regular.ttf');
-    src: url('fonts/Tinos-Bold.ttf') format('truetype'),
-         url('fonts/Tinos-Italic.ttf') format('truetype'),
-}
+
 
 html {
     scroll-behavior: smooth;
