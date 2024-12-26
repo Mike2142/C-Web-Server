@@ -298,7 +298,7 @@ void handle_http_request(struct handler_args *args)
     struct cache *cache = args->cache;
     char *ipaddr = args->socket;
 
-    int request_buffer_size = 65536; // 64K
+    int request_buffer_size = 256000; // 256K
     char request[request_buffer_size];
     char http_method[4];
     char request_path[50];
