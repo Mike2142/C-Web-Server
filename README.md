@@ -14,10 +14,11 @@ kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
 kubectl expose deployment hello-minikube --type=NodePort --port=8080
 
 kubectl port-forward --address 0.0.0.0 service/hello-minikube 3491:8080
+minikube stop
 
 ## Запуск репозитория Gitlab (https://docs.gitlab.com/omnibus/installation/):
 
-В обычной ситуации, сервер GitLab запускается автоматически.
+В обычной ситуации, сервер GitLab запускается автоматически. Требуется 10-15 мин. для полного запуска (доступно окно входа)
 
 Первичный запуск:
 
