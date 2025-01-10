@@ -34,6 +34,9 @@ sudo gitlab-ctl reconfigure
 ## Конструктор Telegram-ботов:
 https://cp.puzzlebot.top/home
 
+## Запуск PostgreDB
+sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
+
 ## Настройки роутера:
 
 Внешний адрес роутера: http://46.38.107.141/
@@ -42,4 +45,5 @@ https://cp.puzzlebot.top/home
 Доп. настройки -> Переадресация NAT -> Виртуальные серверы
 2	Mkolyadin.ru	80	192.168.0.158	3490	TCP		
 3	Hello Minikube	3491	192.168.0.158	3491	TCP		
-4	GitLab	3492	192.168.0.158	80	TCP
+4	GitLab	3492	192.168.0.158	80	TCP		
+5	PostgreDB	2715	192.168.0.158	5432	TCP
