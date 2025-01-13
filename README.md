@@ -31,11 +31,12 @@ minikube stop
 
 sudo gitlab-ctl reconfigure
 
-## Конструктор Telegram-ботов:
-https://cp.puzzlebot.top/home
-
 ## Запуск PostgreDB
 sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
+
+## Телеграм-бот
+Конструктор https://cp.puzzlebot.top/home
+Настройки @botfather (запуск, остановка, и др.)
 
 ## Настройки роутера:
 
