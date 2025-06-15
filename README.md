@@ -59,6 +59,7 @@ cd root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
 4	GitLab	3492	192.168.0.158	80	TCP		
 5	PostgreDB	2715	192.168.0.158	5432	TCP
 6	Jenkins	2717	192.168.0.158	8081	TCP or UDP
+7	Prometheus	2718	192.168.0.158	9091	TCP or UDP
 
 ## Исправленные ошибки.
 - Ошибки сервера: завершение и чистка процессов.
