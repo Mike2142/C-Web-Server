@@ -34,6 +34,12 @@ sudo gitlab-ctl reconfigure
 ## Запуск PostgreDB
 sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
 
+## Запуск Jenkins
+cd ~/contrib/jenkins/quickstart-tutorials/
+docker compose --profile maven up -d
+TODO: Обновить docker и docker-compose, добавить CI/CD функционал Jenkins (https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/).
+Кабинет Jenkins: 192.168.0.158:8081 admin, admin.
+
 ## Телеграм-бот
 Конструктор https://cp.puzzlebot.top/home
 Настройки @botfather (запуск, остановка, и др.)
@@ -49,6 +55,7 @@ sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
 3	Hello Minikube	3491	192.168.0.158	3491	TCP		
 4	GitLab	3492	192.168.0.158	80	TCP		
 5	PostgreDB	2715	192.168.0.158	5432	TCP
+6	Jenkins	2717	192.168.0.158	8081	TCP or UDP
 
 ## Исправленные ошибки.
 - Ошибки сервера: завершение и чистка процессов.

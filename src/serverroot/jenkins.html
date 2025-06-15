@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>mkolyadin</title>
+
+  <link rel="stylesheet" href="styles/cs.css">
+  <link rel="icon" type="image/svg" href="https://static.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg"> 
+</head>
+
+<body>
+<div class="content-wrap">
+
+<h2 id="headerC">
+  Сервер Jenkins.
+</h2>
+<p>Сервер автоматизации Jenkins.</p>
+<p>Развернут на домашнем сервере, в рамках виртуальной машины Linux Centos 7, на базе MacOS.</p>
+
+<p>В рамках автоматизации, работают следующие задачи:
+- Демо задача. Создает текстовый файл hello-world.txt и выводит его в консоль. Запускается каждые 2 минуты.
+- Pipeline Java Maven. Конвейер сборки приложения Java Maven. Запускается вручную.
+  - Скачивает исходный код Java-приложения из репозитория Github.
+  - Запускает конвейер согласно файлу настроек Jenkinsfile.
+  - Собирает приложение в jar файл.
+</p>
+
+<p>Кабинет Jenkins: <a href="http://46.38.107.141:2717/" target="_blank">46.38.107.141:2717</a>.</p>
+
+</div>
+</body>
+
+</html>
