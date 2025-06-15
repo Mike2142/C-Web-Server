@@ -37,7 +37,6 @@ sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
 ## Запуск Jenkins
 cd ~/contrib/jenkins/quickstart-tutorials/
 docker compose --profile maven up -d
-TODO: Обновить docker и docker-compose, добавить CI/CD функционал Jenkins (https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/).
 Кабинет Jenkins: 192.168.0.158:8081 admin, admin.
 
 ## Телеграм-бот
