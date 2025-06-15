@@ -37,7 +37,11 @@ sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
 ## Запуск Jenkins
 cd ~/contrib/jenkins/quickstart-tutorials/
 docker compose --profile maven up -d
-Кабинет Jenkins: 192.168.0.158:8081 admin, admin.
+Кабинет Jenkins: 192.168.0.158:8081
+
+## Запуск Prometheus
+cd root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
+./prometheus --config.file=prometheus.yml --web.listen-address=:9091
 
 ## Телеграм-бот
 Конструктор https://cp.puzzlebot.top/home
