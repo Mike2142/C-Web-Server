@@ -4,19 +4,40 @@
 
 cd src && make && ./server
 
-## Запуск кластера Kubernetes Minikube:
+## Запуск кластера Kubernetes:
 
-minikube start --force
-minikube delete (если не запускается)
-kubectl get po -A
+minikube profile list (список кластеров)
+minikube profile c2 (переключение для управления kubectl)
+minikube delete --profile c2 (если не запускается)
 
-kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
-kubectl expose deployment hello-minikube --type=NodePort --port=8080
+minikube start --profile c2 --nodes 3 --force
+kubectl get pods -A
 
-kubectl port-forward --address 0.0.0.0 service/hello-minikube 3491:8080
-minikube stop
+Проброс портов из контейнеров внутрь кластера.
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+kubectl expose deployment/php-apache --type="NodePort" --port 80
+
+Проброс портов из кластера наружу.
+kubectl port-forward --address 0.0.0.0 service/kubernetes-bootcamp 3491:8080
+kubectl port-forward --address 0.0.0.0 service/php-apache 3492:80
+
+TODO: Вывод панели управления на сайт mkolyadin.ru (?).
+Мониторинг и управление кластерами.
+minikube dashboard
+
+
 
 ## Запуск репозитория Gitlab (https://docs.gitlab.com/omnibus/installation/):
+
+sudo gitlab-ctl start
+
+sudo gitlab-ctl stop
+
+sudo gitlab-ctl restart
+
+sudo gitlab-ctl restart sidekiq (запуск инд. компонентов)
+
+sudo gitlab-ctl restart-except gitaly redis
 
 В обычной ситуации, сервер GitLab запускается автоматически. Требуется 10-15 мин. для полного запуска (доступно окно входа).
 
@@ -31,17 +52,40 @@ minikube stop
 
 sudo gitlab-ctl reconfigure
 
+TODO: Добавить описание компонентов.
+
 ## Запуск PostgreDB
 sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
 
 ## Запуск Jenkins
-cd ~/contrib/jenkins/quickstart-tutorials/
+cd /root/contrib/jenkins/quickstart-tutorials/
 docker compose --profile maven up -d
+docker compose --profile maven down
+
 Кабинет Jenkins: 192.168.0.158:8081
 
 ## Запуск Prometheus
-cd root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
+cd /root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
 ./prometheus --config.file=prometheus.yml --web.listen-address=:9091
+
+## Terraform Yandex Cloud
+Создание инфры:
+    - Папка contrib/terraform/
+    - terraform destroy -> validate -> fmt -> plan -> apply
+    - Статус облака отображается в консоли Яндекса.
+    - Настройка машин после создания.
+      - Пароль для guest, ssh-доступ с паролем (/etc/ssh/sshd_config AllowPasswordAuthentication).
+
+Копирование конфигов для репозитория:
+    - cp ../terraform/main.tf ./terraform-example/
+    - cp ../terraform/meta.txt ./terraform-example/
+
+Токен для облака (YC_Token) нужно обновлять каждый день (делать перезапуск терминала, .bash_profile).
+
+TODO: 
+- Пароль для гостевых аккаунтов:
+  - meta.txt/lock_passwd: false 
+  - meta.txt/passwd: <хэш пароля SHA-512>.
 
 ## Телеграм-бот
 Конструктор https://cp.puzzlebot.top/home
@@ -60,6 +104,12 @@ cd root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
 5	PostgreDB	2715	192.168.0.158	5432	TCP
 6	Jenkins	2717	192.168.0.158	8081	TCP or UDP
 7	Prometheus	2718	192.168.0.158	9091	TCP or UDP
+
+## TODO
+- Мониторинг инфраструктуры Zabbix.
+- Отслеживание OpenTelemetry.
+- Поисковый движок Elastic Search и стек ELK.
+
 
 ## Исправленные ошибки.
 - Ошибки сервера: завершение и чистка процессов.
