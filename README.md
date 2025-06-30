@@ -25,35 +25,6 @@ TODO: Вывод панели управления на сайт mkolyadin.ru (?
 Мониторинг и управление кластерами.
 minikube dashboard
 
-
-
-## Запуск репозитория Gitlab (https://docs.gitlab.com/omnibus/installation/):
-
-sudo gitlab-ctl start
-
-sudo gitlab-ctl stop
-
-sudo gitlab-ctl restart
-
-sudo gitlab-ctl restart sidekiq (запуск инд. компонентов)
-
-sudo gitlab-ctl restart-except gitaly redis
-
-В обычной ситуации, сервер GitLab запускается автоматически. Требуется 10-15 мин. для полного запуска (доступно окно входа).
-
-Первичный запуск:
-
-- Скачать RPM пакет (потребуется VPN):
-    - Enterprise https://packages.gitlab.com/gitlab/gitlab-ee
-    - Community https://packages.gitlab.com/gitlab/gitlab-ce
-- Прописать адрес сервера (192.168.0.158).
-    - Строка external_url in /etc/gitlab/gitlab.rb
-- Настроить корневого пользователя.
-
-sudo gitlab-ctl reconfigure
-
-TODO: Добавить описание компонентов.
-
 ## Запуск PostgreDB
 sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
 
@@ -74,13 +45,13 @@ cd /root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
     - terraform destroy -> validate -> fmt -> plan -> apply
     - Статус облака отображается в консоли Яндекса.
     - Настройка машин после создания.
-      - Пароль для guest, ssh-доступ с паролем (/etc/ssh/sshd_config AllowPasswordAuthentication).
+      - Пароль для guest (guest), ssh-доступ с паролем (/etc/ssh/sshd_config AllowPasswordAuthentication).
 
 Копирование конфигов для репозитория:
     - cp ../terraform/main.tf ./terraform-example/
     - cp ../terraform/meta.txt ./terraform-example/
 
-Токен для облака (YC_Token) нужно обновлять каждый день (делать перезапуск терминала, .bash_profile).
+Токен для облака (YC_Token) нужно обновлять каждый день (делать перезапуск терминала, source .bash_profile).
 
 TODO: 
 - Пароль для гостевых аккаунтов:
@@ -109,6 +80,7 @@ TODO:
 - Мониторинг инфраструктуры Zabbix.
 - Отслеживание OpenTelemetry.
 - Поисковый движок Elastic Search и стек ELK.
+- Сервер Gitlab (удален из-за расхода ресурсов, требует 4 ядра, содержит много сервисов).
 
 
 ## Исправленные ошибки.
