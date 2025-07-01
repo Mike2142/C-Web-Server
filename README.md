@@ -18,8 +18,9 @@ kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
 kubectl expose deployment/php-apache --type="NodePort" --port 80
 
 Проброс портов из кластера наружу.
-kubectl port-forward --address 0.0.0.0 service/kubernetes-bootcamp 3491:8080
-kubectl port-forward --address 0.0.0.0 service/php-apache 3492:80
+while true; do kubectl port-forward --address 0.0.0.0 service/kubernetes-bootcamp 3491:8080; done
+while true; do kubectl port-forward --address 0.0.0.0 service/php-apache 3492:80; done
+(использовать цикл или править конфиг Cubelet - убрать отключение при неактивности)
 
 TODO: Вывод панели управления на сайт mkolyadin.ru (?).
 Мониторинг и управление кластерами.
@@ -87,3 +88,4 @@ TODO:
 - Ошибки сервера: завершение и чистка процессов.
 - Ошибки HTML-cтраниц: вёрстка, ошибки загружаемых ресурсов.
 - Сетевые ошибки - роутер обрывал соединения при большой нагрузке (торренты, ERR_CONNECTION_RESET).
+- Kubernetes, автоотключение пода при пробросе портов (idle timeout).
