@@ -1,4 +1,5 @@
 # C Server Mkolyadin.ru
+# Инструкции для запуска сервера и приложений.
 
 ## Запуск веб-сервера:
 
@@ -7,10 +8,9 @@ cd src && make && ./server
 ## Запуск кластера Kubernetes:
 
 minikube profile list (список кластеров)
-minikube profile c2 (переключение для управления kubectl)
-minikube delete --profile c2 (если не запускается)
+minikube profile nodejs или apache (переключение для управления kubectl)
 
-minikube start --profile c2 --nodes 3 --force
+minikube start --profile nodejs --nodes 3 --force
 kubectl get pods -A
 
 Проброс портов из контейнеров внутрь кластера.
@@ -21,10 +21,6 @@ kubectl expose deployment/php-apache --type="NodePort" --port 80
 while true; do kubectl port-forward --address 0.0.0.0 service/kubernetes-bootcamp 3491:8080; done
 while true; do kubectl port-forward --address 0.0.0.0 service/php-apache 3492:80; done
 (использовать цикл или править конфиг Cubelet - убрать отключение при неактивности)
-
-TODO: Вывод панели управления на сайт mkolyadin.ru (?).
-Мониторинг и управление кластерами.
-minikube dashboard
 
 ## Запуск PostgreDB
 sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
@@ -45,19 +41,12 @@ cd /root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
     - Папка contrib/terraform/
     - terraform destroy -> validate -> fmt -> plan -> apply
     - Статус облака отображается в консоли Яндекса.
-    - Настройка машин после создания.
-      - Пароль для guest (guest), ssh-доступ с паролем (/etc/ssh/sshd_config AllowPasswordAuthentication).
 
 Копирование конфигов для репозитория:
     - cp ../terraform/main.tf ./terraform-example/
     - cp ../terraform/meta.txt ./terraform-example/
 
 Токен для облака (YC_Token) нужно обновлять каждый день (делать перезапуск терминала, source .bash_profile).
-
-TODO: 
-- Пароль для гостевых аккаунтов:
-  - meta.txt/lock_passwd: false 
-  - meta.txt/passwd: <хэш пароля SHA-512>.
 
 ## Телеграм-бот
 Конструктор https://cp.puzzlebot.top/home
