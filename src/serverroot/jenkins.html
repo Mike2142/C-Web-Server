@@ -19,18 +19,18 @@
 <p>Сервер автоматизации Jenkins.</p>
 <p>Развернут на домашней системе MacOS, из контейнеров docker-compose в рамках виртуальной системы Linux CentOS.</p>
 
-<p>На сервере Jenkins работают следующие задачи (jobs):
+<p>На сервере Jenkins работает следующая задача (job):
 
-- Демо-задача. Создает текстовый файл hello-world.txt и выводит его в консоль. Запускается каждые 2 минуты.
-
-- Pipeline Java Maven. Конвейер сборки приложения Java Maven. Запускается вручную.
+Пайплайн CI/CD для приложения Java Maven.
   - Скачивает исходный код Java-приложения из репозитория Github.
   - Запускает конвейер согласно файлу Jenkinsfile.
-  - Собирает приложение в jar файл.
+    - Стадия BUILD: Сборка приложения в jar файл, без тестов (mvn -B -DskipTests clean package).
+    - Стадия TEST: Проводит тесты JUnit (mvn test), сохраняет результаты в формате XML и выводит их в кабинете Jenkins.
+    - Стадия DELIVER: Запускает скрипт доставки (deliver.sh). Скрипт сохраняет приложение (jar) в локальный репо для Maven-пакетов и запускает приложение (java jar).
 </p>
 
 <p>Кабинет Jenkins: <a href="http://46.38.107.141:2717/" target="_blank">46.38.107.141:2717</a>.</p>
-<p>Конвейер CI/CD Java Maven <a href="http://46.38.107.141:2717/job/Java-Maven-Pipeline/">http://46.38.107.141:2717/job/Java-Maven-Pipeline/</a>.</p>
+<p>Пайплайн CI/CD Java Maven <a href="http://46.38.107.141:2717/job/Java-Maven-Pipeline/">http://46.38.107.141:2717/job/Java-Maven-Pipeline/</a>.</p>
 
 </div>
 </body>
