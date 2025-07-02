@@ -41,10 +41,6 @@ cd /root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
     - terraform destroy -> validate -> fmt -> plan -> apply
     - Статус облака отображается в консоли Яндекса.
 
-Копирование конфигов для репозитория:
-    - cp ../terraform/main.tf ./terraform-example/
-    - cp ../terraform/meta.txt ./terraform-example/
-
 Токен для облака (YC_Token) нужно обновлять каждый день (делать перезапуск терминала, source .bash_profile).
 
 ## Телеграм-бот
