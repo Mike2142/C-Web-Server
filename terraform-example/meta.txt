@@ -1,0 +1,27 @@
+#cloud-config
+ssh_pwauth: true
+
+users:
+  - name: mkolyadin
+    groups: sudo
+    shell: /bin/bash
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
+    ssh_authorized_keys:
+      - ssh-rsa ***
+  - name: guest
+    groups: users
+    shell: /bin/bash
+    no_create_home: true
+
+
+
+
+
+
+
+
+ 
+  
+
+
+ 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>mkolyadin</title>
+
+  <link rel="stylesheet" href="styles/cs.css">
+  <link rel="icon" type="image/svg" href="https://static.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg"> 
+</head>
+
+<body>
+<div class="content-wrap">
+
+<h2>
+  Веб-сервер mkolyadin.ru
+</h2>
+<p>Сервер сайта mkolyadin.ru написан мной на языке C. Подключены стандартные библиотеки пакета GCC.</p>
+<p>Сервер работает из VMware Centos 7, на базе MacOS.</p>
+<p><a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">Исходный код.</a>
+<a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">Основа проекта.</a>
+</p>
+<h2 id="headerServer">
+    Функционал сервера.
+</h2>
+<p>- HTTP. Парсинг запросов и создание ответов.
+- Отправка файлов.
+- LRU кэш файлов.
+    - Хэш таблица и связанный список.
+    - Срок годности кэш-файлов.
+- Многопоточность (pthread.h). Блокировка файлов и чистка памяти.
+- Сообщения клиента через форму связи. Парсинг UTF-8 и обогащение.
+- Защита от атак. Фильтрация запросов.
+- Почтовый сервер.
+</p>
+<h2>
+    Интерактивность.
+</h2>
+<p>- <a href="#headerForm">Форма сообщений.</a>
+- База сообщений <a href="/comments.html" target="_blank">/comments.html</a>.
+- Api. Генерирует случайное число 0-20 <a href="/d20" target="_blank">/d20</a>.
+- Api. Отправляет ip адрес пользователя <a href="/myip" target="_blank">/myip</a>.
+</p>
+
+<h2 id="headerForm">
+    Форма сообщений.
+</h2> 
+  
+<form method="POST">
+    <label for="name" id="nameLabel">Имя</label>
+    <input type="text" id="name" name="name" value="" required>
+
+    <label for="comment" id="commentLabel">Сообщение</label>
+    <input type="text" id="comment" name="comment" value="" required>
+
+    <input type="submit" id="submitBtn" value="Отправить">
+</form>
+
+</div>
+</body>
+
+</html>

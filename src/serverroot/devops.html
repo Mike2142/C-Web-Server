@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>mkolyadin</title>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      padding-bottom: 20px;
+      margin: 0;
+      font-family: "Times New Roman", serif;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      display: block;
+      position: fixed;
+      width: 100%;
+      background: white;
+      padding: 20px;
+      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    .topbar button {
+      padding: 3px 15px;
+    }
+
+    .topbar button:nth-child(n + 2) {
+      margin-left: 10px;
+    }
+
+    .topbar a {
+      margin-left: 10px;
+    }
+
+    .content-wrap {
+      padding: 10px 20px 20px 20px;
+    }
+
+    h2 {
+      color: rgb(210, 206, 200);
+      color: gainsboro;
+      color: #330000;
+    }
+
+    p {
+      white-space: pre;
+      font-size: 17px;
+      color: rgb(210, 206, 200);
+      color: gainsboro;
+      color: #330000;
+    }
+
+    a {
+      color: blue;
+    }
+
+    form {
+      padding: 0 0 40px 0;
+    }
+
+    form label {
+      display: block;
+      padding-top: 10px;
+    }
+
+    form label:first-child {
+      padding-top: 0;
+    }
+
+    form input {
+      display: block;
+      margin-top: 10px;
+    }
+
+    form input:last-child {
+      cursor: pointer;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+
+  <link rel="stylesheet" href="styles/cs.css">
+  <link rel="icon" type="image/svg" href="https://static.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg"> 
+  <!-- <link rel="icon" type="image/svg" href="https://upload.wikimedia.org/wikipedia/commons/2/2a/Rebel_Alliance_logo.svg">  -->
+  <!-- Disable icon:  <link rel="icon" href="data:,"> -->
+ 
+</head>
+
+<body>
+
+
+<div class="content-wrap">
+
+<iframe src="https://drive.google.com/file/d/1Jvb5HXY1GdCr0nC1-Kp07x942_dGAhlz/preview" width="635" height="340" allow="autoplay"></iframe>
+
+<h2 id="header">
+Привет, мир!
+</h2>
+
+<p id="intro">Я DevOps-инженер, Михаил Колядин.
+Этот личный сайт отправлен самодельным <a href="/server.html" target="_blank">веб-сервером</a>.
+
+Здесь работают:
+
+- Кластер <a href="/kuber.html" target="_blank">Kubernetes</a> с балансировкой нагрузки.
+- Кластер <a href="/kuber-apache.html" target="_blank">Kubernetes</a> с авто-масштабированием.
+- Кластер Docker Swarm (WIP).
+- Контейнеры Linux LXC (WIP).
+
+- Инфраструктура <a href="/terraform.html" target="_blank">Terraform в облаке Yandex Cloud</a>.
+- Пайплайн CI/CD <a href="/jenkins.html" target="_blank">Jenkins</a> для Java-приложения в контейнерах Docker-compose.
+- Мониторинг <a href="/prometheus.html" target="_blank">Prometheus</a>.
+- База данных <a href="/postgres.html" target="_blank">PostgreSQL</a>.
+
+- Виртуальная машина Linux Centos 7 - хозяйка всех приложений.
+
+А также:
+
+- VPN сервер <a href="/vpn.html" target="_blank">OpenVPN</a>.
+- Политика <a href="/safety.html" target="_blank">безопасности</a>.
+- Личный <a href="https://t.me/Secretary2142Bot" target="_blank">telegram-бот</a>, который всегда рад общению.
+
+&#x1F6C8; Данный сайт работает на всех устройствах и браузерах. 
+Но если страницы открываются плохо - временно отключите антивирус.
+</p>
+
+<!-- 
+<p id="lookout"><b>Моя текущая команда:</b>
+Стек: C++, Java, Perl.
+Компания: <a href="https://www.amdocs.com/">Bi Telecom, the Amdocs company</a>.
+</p>
+-->
+  
+<p><b>Мой коммерческий опыт:</b>
+1 год DevOps на стеке: C++, Java, vSphere, Gitlab CI/CD, Ansible.
+5 лет Fullstack на стеке: C# .NET, Python Django, TypeScript Angular.
+1 год Frontend. JavaScript.
+</p>
+
+<p id="contacts"><b>Контакты:</b>
+<a href="mailto:mail@mkolyadin.ru">mail@mkolyadin.ru</a>
+<a href="https://t.me/mkolyadin1" target="_blank">Telegram</a>
+<a href="https://wa.me/79265265663" target="_blank">Whatsapp</a>
+</p>
+
+<p id="aboutMe"><b>Я ищу:</b> Позицию DevOps-инженера, с фокусом на проектирование и запуск надежных масштабируемых систем.
+<b>О себе:</b> Люблю спорт и технологии. Меня вдохновляют проекты в сферах образования, телеком и городской среды.
+<b>Навыки:</b> Слепая печать, самообучение, разговорный английский язык.
+<b>Cертификаты:</b> Linux Foundation, Linux DevOps, Linux Kernel Development, Linux Kubernetes (в процессе), CS50, CS50 Web.
+
+<a id="resumeRus" href="https://hh.ru/resume/478d89baff0d78a4b40039ed1f6c4e6d423056" target="_blank">Резюме на сайте headhunter</a>.
+</p>
+
+
+<h2 id="">
+  Опыт по devops-технологиям.
+</h2>
+<p id="">- Linux (Debian, Ubuntu, Red Hat, Centos), Windows, MacOS.
+- Bash, Perl, PowerShell.
+- WSL, VMware, vSphere, Virtual Box, Parallels. 
+- Docker, Kubernetes.
+- Github, Gitlab, Bitbucket, Jira, Azure DevOps.
+- UDP, TCP/IP, HTTP, SSH tunnel.
+- Vim, VS Code, Visual Studio, IntelliJ, Notepad++.
+- Windows VPN, Cisco AnyConnect, OpenVPN, NetProxy.
+- И другие.
+</p>
+
+
+<h2 id="">
+    Опыт по backend-технологиям.
+</h2>
+<p id="">- C++, C# .NET, Python Django.
+- OracleDB, PostGre, SQL Server, MySQL, Dgraph.
+- И другие.
+</p>
+  
+<h2 id="">
+    Опыт по frontend-технологиям.
+</h2>
+<p id="">- JavaScript, TypeScript, RxJS, NGXS.
+- Angular, Vue, React.
+- SCSS и остальные препроцессоры.
+- HTML, шаблонизатор Nunjucks.
+- Chart.js, Cytoscape и др. библиотеки визуализации.
+- Макеты Figma, Sketch.
+- npm
+- И другие технологии.
+</p>
+
+<h2 id="">
+    Другие проекты.
+</h2>
+<p id="">- Проекты <a href="/cs-projects.html" target="_blank">С# .NET</a>.
+- Проекты <a href="/backend.html" target="_blank">Python Django</a>. 
+- Проект <a href="/proj-node.html" target="_blank">Node.js</a>.
+- Frontend <a href="/frontend.html" target="_blank">проекты</a>.  
+- Браузерная игра <a href="/pokemon.html" target="_blank">Покемоны</a>.  
+- DIY <a href="/diy.html" target="_blank">проекты по электронике</a>.
+- Проекты <a href="/diy-arduino.html" target="_blank">на базе Arduino</a>.
+</p>
+
+<p>Спасибо за внимание - буду рад обратной связи.<br>Хорошего дня. 👍</p>
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,12 +1,12 @@
 CC=gcc
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra -std=c99
 
 OBJS=server.o net.o file.o mime.o cache.o hashtable.o llist.o
 
 all: server
 
 server: $(OBJS)
-	gcc -o $@ $^
+	gcc -pthread -o $@ $^
 
 net.o: net.c net.h
 

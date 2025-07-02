@@ -19,10 +19,13 @@ struct file_data *file_load(char *filename)
         return NULL;
     }
 
+    // TODO: file check, update for Centos7
     // Make sure it's a regular file
+    /* 
     if (!(buf.st_mode & S_IFREG)) {
         return NULL;
-    }
+    } 
+    */
 
     // Open the file for reading
     FILE *fp = fopen(filename, "rb");
@@ -36,6 +39,7 @@ struct file_data *file_load(char *filename)
     p = buffer = malloc(bytes_remaining);
 
     if (buffer == NULL) {
+        fclose(fp);
         return NULL;
     }
 
@@ -43,6 +47,7 @@ struct file_data *file_load(char *filename)
     while (bytes_read = fread(p, 1, bytes_remaining, fp), bytes_read != 0 && bytes_remaining > 0) {
         if (bytes_read == -1) {
             free(buffer);
+            fclose(fp);
             return NULL;
         }
 
@@ -56,13 +61,24 @@ struct file_data *file_load(char *filename)
 
     if (filedata == NULL) {
         free(buffer);
+        fclose(fp);
         return NULL;
     }
 
     filedata->data = buffer;
     filedata->size = total_bytes;
 
+    // TODO: fclose, redundancy check
+    fclose(fp);
+
     return filedata;
+}
+
+void file_write(char *filename, char *comment) 
+{
+    FILE *f = fopen(filename, "a");
+    fputs(comment, f);
+    fclose(f);
 }
 
 /**
