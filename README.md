@@ -61,7 +61,7 @@ cd /root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
 6	Jenkins	2717	192.168.0.158	8081	TCP or UDP
 7	Prometheus	2718	192.168.0.158	9091	TCP or UDP
 
-## TODO
+## TODO (?)
 - Мониторинг инфраструктуры Zabbix.
 - Отслеживание OpenTelemetry.
 - Поисковый движок Elastic Search и стек ELK.
