@@ -9,12 +9,15 @@ cd src && make && ./server
 minikube profile list (список кластеров)
 minikube profile nodejs или apache (переключение для управления kubectl)
 
-minikube start --profile nodejs --nodes 3 --force
+minikube start --profile nodejs --nodes 2 --force
+minikube start --profile apache --nodes 2 --force
 kubectl get pods -A
+
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+kubectl apply -f https://k8s.io/examples/application/php-apache.yaml
 
 Проброс портов из контейнеров внутрь кластера.
 kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
-kubectl expose deployment/php-apache --type="NodePort" --port 80
 
 Проброс портов из кластера наружу.
 while true; do kubectl port-forward --address 0.0.0.0 service/kubernetes-bootcamp 3491:8080; done
