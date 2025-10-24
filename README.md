@@ -2,6 +2,8 @@
 
 ## Запуск веб-сервера:
 
+while true; do ./server; done
+
 cd src && make && ./server
 
 ## Запуск кластера Kubernetes:
