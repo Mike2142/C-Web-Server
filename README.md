@@ -26,12 +26,18 @@ while true; do kubectl port-forward --address 0.0.0.0 service/kubernetes-bootcam
 while true; do kubectl port-forward --address 0.0.0.0 service/php-apache 3492:80; done
 (использовать цикл или править конфиг Cubelet - убрать отключение при неактивности)
 
+Повторный запуск.
+minikube profile list
+minikube start --force
+while true; do kubectl port-forward --address 0.0.0.0 service/php-apache 3492:80; done
+
 ## Запуск PostgreDB
 sudo -u postgres postgres -h 0.0.0.0 -D /var/lib/pgsql/postgres-db
 
 ## Запуск Jenkins
 cd /root/contrib/jenkins/quickstart-tutorials/
 docker compose --profile maven up -d
+docker compose --profile maven up
 docker compose --profile maven down
 
 Кабинет Jenkins: 192.168.0.158:8081
