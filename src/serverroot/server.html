@@ -16,8 +16,8 @@
 <h2>
   Веб-сервер mkolyadin.ru
 </h2>
-<p>Сервер сайта mkolyadin.ru написан на языке C. Используются только стандартные библиотеки пакета GCC.</p>
-<p>Сервер работает из VMware Centos 7, на базе MacOS.</p>
+<p>Сервер написан на языке C, с минимальным набором библиотек.</p>
+<p>Окружение VMware Centos 7.</p>
 <p><a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">Исходный код.</a>
 <a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">Основа проекта.</a>
 <a href="/safety.html" target="_blank">Политика безопасности.</a>
@@ -25,38 +25,19 @@
 <h2 id="headerServer">
     Функционал сервера.
 </h2>
-<p>- HTTP. Парсинг запросов и создание ответов.
-- Отправка файлов.
-- LRU кэш файлов.
-    - Хэш таблица и связанный список.
-    - Срок годности кэш-файлов.
+<p>- Парсинг HTTP-запросов, создание ответов и отправка.
+- Кеширование файлов (LRU cache). Хэш таблицы и связанные списки. Срок годности кеша.
 - Многопоточность (pthread.h). Блокировка файлов и чистка памяти.
-- Сообщения клиента через форму связи. Парсинг UTF-8 и обогащение.
 - Защита от атак. Фильтрация запросов.
-- Почтовый сервер.
+- Простые приложения.
 </p>
 <h2>
-    Интерактивность.
+    Приложения сервера.
 </h2>
-<p>- <a href="#headerForm">Форма сообщений.</a>
-- База сообщений <a href="/comments.html" target="_blank">/comments.html</a>.
-- Api. Генерирует случайное число 0-20 <a href="/d20" target="_blank">/d20</a>.
-- Api. Отправляет ip адрес пользователя <a href="/myip" target="_blank">/myip</a>.
+<p>- <a href="/feedback-form.html" target="_blank">Форма сообщений</a>.
+- <a href="/d20" target="_blank">Генератор чисел</a>.
+- <a href="/myip" target="_blank">Вывод IP-адреса</a>.
 </p>
-
-<h2 id="headerForm">
-    Форма сообщений.
-</h2> 
-  
-<form method="POST">
-    <label for="name" id="nameLabel">Имя</label>
-    <input type="text" id="name" name="name" value="" required>
-
-    <label for="comment" id="commentLabel">Сообщение</label>
-    <input type="text" id="comment" name="comment" value="" required>
-
-    <input type="submit" id="submitBtn" value="Отправить">
-</form>
 
 </div>
 </body>

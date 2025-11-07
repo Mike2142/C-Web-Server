@@ -102,7 +102,7 @@ void get_d20(int fd)
 {
     // Generate a random number between 0 and 20 inclusive
     char roll_result[50];
-    sprintf(roll_result, "<h1>%d</h1><h1>refresh to roll dice</h1>", rand() % 21);
+    sprintf(roll_result, "<h1>Refresh the page to throw the D20 dice</h1><h1>%d</h1>", rand() % 21);
     int result_length = strlen(roll_result);
 
     send_response(fd, "HTTP/1.1 200 OK", "text/html", roll_result, result_length);
@@ -112,7 +112,7 @@ void get_ip(int fd, char *ip)
 {
     // Generate a random number between 0 and 20 inclusive
     char html[200];
-    sprintf(html, "<h1>Your IP is: %s</h1><h1>Nice to meet you!</h1>", ip);
+    sprintf(html, "<h1>Your IP-address is:</h1><h1>%s</h1>", ip);
     int html_length = strlen(html);
 
     send_response(fd, "HTTP/1.1 200 OK", "text/html", html, html_length);
@@ -319,13 +319,14 @@ void handle_http_request(struct handler_args *args)
         int post0_flag = !strcmp(http_method, "POST");
         int post1_flag = !strcmp(http_method, "POST/");
         int post2_flag = !strcmp(http_method, "POST/index.html"); 
-        int post3_flag = !strcmp(http_method, "POST/server.html");
+        int post3_flag = !strcmp(http_method, "POST/feedback-form.html");
 
         int d20_flag = !strcmp(request_path, "/d20");
         int myip_flag = !strcmp(request_path, "/myip");
         int index0_flag = !strcmp(request_path, "/");
         int index1_flag = !strcmp(request_path, "/index.html");
         int server_flag = !strcmp(request_path, "/server.html");
+        int feedback_flag = !strcmp(request_path, "/feedback-form.html");
 
         fprintf(stderr, "\nhttp_method: %s\n", http_method);
         fprintf(stderr, "request_path: %s\n", request_path);
@@ -343,7 +344,7 @@ void handle_http_request(struct handler_args *args)
             get_file(fd, cache, request_path);
         }
 
-        if ((index0_flag || index1_flag || server_flag) && (post0_flag || post1_flag || post2_flag || post3_flag)) {
+        if ((index0_flag || index1_flag || server_flag || feedback_flag) && (post0_flag || post1_flag || post2_flag || post3_flag)) {
             fprintf(stderr, "POST sequence started.\n");
 
             int sob = find_start_of_body(request, bytes_recvd);
