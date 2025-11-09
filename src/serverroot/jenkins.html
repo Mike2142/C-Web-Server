@@ -16,21 +16,17 @@
 <h2 id="headerC">
   Сервер Jenkins.
 </h2>
-<p>Сервер автоматизации Jenkins.</p>
-<p>Развернут на домашней системе MacOS, из контейнеров docker-compose в рамках виртуальной системы Linux CentOS.</p>
+<p>Окружение: Docker compose, VM Linux CentOS.</p>
 
-<p>На сервере Jenkins работает следующая задача (job):
-
-Пайплайн CI/CD для приложения Java Maven.
-  - Скачивает исходный код Java-приложения из репозитория Github.
-  - Запускает конвейер согласно файлу Jenkinsfile.
-    - Стадия BUILD: Сборка приложения в jar файл, без тестов (mvn -B -DskipTests clean package).
-    - Стадия TEST: Проводит тесты JUnit (mvn test), сохраняет результаты в формате XML и выводит их в кабинете Jenkins.
-    - Стадия DELIVER: Запускает скрипт доставки (deliver.sh). Скрипт сохраняет приложение (jar) в локальный репо для Maven-пакетов и запускает приложение (java jar).
+<p>Пайплайн CI/CD для приложения Java Maven.
+  - Загрузка Java-кода из Github.
+  - Стадия BUILD: Сборка приложения в jar файл (mvn -B -DskipTests clean package).
+  - Стадия TEST: Проводит тесты JUnit (mvn test), сохраняет результаты в формате XML и выводит их в кабинете Jenkins.
+  - Стадия DELIVER: Скрипт доставки (deliver.sh). Скрипт сохраняет приложение (jar) в локальный репо для Maven-пакетов и запускает приложение (java jar).
 </p>
 
 <p><a href="http://46.38.107.141:2717/" target="_blank">Кабинет Jenkins</a>.</p>
-<p><a href="http://46.38.107.141:2717/job/Java-Maven-Pipeline/">Пайплайн CI/CD Java Maven</a>.</p>
+<p><a href="http://46.38.107.141:2717/job/Java-Maven-Pipeline/">Пайплайн CI/CD</a>.</p>
 
 </div>
 </body>
