@@ -5,7 +5,7 @@ html {
 body {
   padding-bottom: 20px;
   margin: 0;
-  font-family: "Times New Roman", serif;
+  font-family: "PT Serif", "Times New Roman", Georgia, serif;
 }
 
 button {
@@ -38,21 +38,21 @@ button {
 }
 
 h2 {
-  color: rgb(210, 206, 200);
-  color: gainsboro;
-  color: #330000;
+  color: black;
 }
 
 p {
   white-space: pre;
-  font-size: 17px;
-  color: rgb(210, 206, 200);
-  color: gainsboro;
-  color: #330000;
+  font-size: 18px;
+  color: black;
 }
 
 a {
-  color: blue;
+  color: #3344DD;
+}
+
+a:visited {
+  color: #884488;
 }
 
 form {
