@@ -6,6 +6,33 @@ while true; do ./server; done
 
 cd src && make && ./server
 
+## Запуск прокси-сервера NGINX (TLS шифрование).
+Генерация тестовых сертификатов.
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+
+Конфиг NGINX
+- Перенаправление HTTP на HTTPS.
+- Пути для сертификатов (getssl).
+nano /etc/nginx/conf.d/proxy.conf 
+
+nginx -t
+systemctl reload nginx
+
+## Генерация TLS-сертификатов.
+Обновление сертификата на 90 дней.
+getssl -f mkolyadin.ru
+systemctl reload nginx
+
+Установка программы.
+curl --silent https://raw.githubusercontent.com/srvrco/getssl/latest/getssl > getssl ; chmod 700 getssl
+getssl
+nano ~/.getssl/mkolyadin.ru/getssl.cfg
+
+Задача для crontab
+~/bin/renew_cert.sh 
+sudo crontab -e
+30 3 * * * /root/bin/renew_cert.sh > /var/log/getssl_renew.log 2>&1
+
 ## Запуск кластера Kubernetes:
 
 minikube profile list (список кластеров)

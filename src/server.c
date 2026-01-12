@@ -150,7 +150,7 @@ void resp_404(int fd)
 void get_file(int fd, struct cache *cache, char *request_path)
 {
     struct cache_entry *cacheentry;
-    char filepath[4096];
+    char filepath[12096];
     struct file_data *filedata; 
     char *mime_type;
 
@@ -301,7 +301,7 @@ void handle_http_request(struct handler_args *args)
     int request_buffer_size = 256000; // 256K
     char request[request_buffer_size];
     char http_method[4];
-    char request_path[50];
+    char request_path[150];
 
     // Read request
     int isProperRequest = 1;
@@ -312,7 +312,7 @@ void handle_http_request(struct handler_args *args)
         isProperRequest = 0;
     }
 
-    sscanf(request, "%4s %50s\n", http_method, request_path);
+    sscanf(request, "%4s %150s\n", http_method, request_path);
 
     if (isProperRequest) {
         int get_flag = !strcmp(http_method, "GET"); 
@@ -439,6 +439,9 @@ int main(void)
             perror("accept");
             continue;
         }
+
+        // TODO Use IP-address from header "X-Forwarded-For" (forwarded by NGINX)
+        // If needed for logging and analytics.
 
         // Print out a message that we got the connection
         inet_ntop(their_addr.ss_family,
