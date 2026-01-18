@@ -21,12 +21,12 @@
 <p>Пайплайн CI/CD для приложения Java Maven.
   - Загрузка Java-кода из Github.
   - Стадия BUILD: Сборка приложения в jar файл (mvn -B -DskipTests clean package).
-  - Стадия TEST: Проводит тесты JUnit (mvn test), сохраняет результаты в формате XML и выводит их в кабинете Jenkins.
-  - Стадия DELIVER: Скрипт доставки (deliver.sh). Скрипт сохраняет приложение (jar) в локальный репо для Maven-пакетов и запускает приложение (java jar).
+  - Стадия TEST: Проводит тесты JUnit (mvn test), сохраняет результаты (XML) и выводит их в кабинете Jenkins.
+  - Стадия DELIVER: Скрипт (deliver.sh) сохраняет приложение (jar) в репо для Maven-пакетов и запускает его (java jar).
 </p>
 
-<p><a href="http://46.38.107.141:2717/" target="_blank">Кабинет Jenkins</a>.</p>
-<p><a href="http://46.38.107.141:2717/job/Java-Maven-Pipeline/">Пайплайн CI/CD</a>.</p>
+<p><a href="http://46.38.107.141:2717/" target="_blank">Кабинет Jenkins</a>.
+<a href="http://46.38.107.141:2717/job/Java-Maven-Pipeline/" target="_blank">Пайплайн CI/CD</a>.</p>
 
 </div>
 </body>
