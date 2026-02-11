@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Mkolyadin.ru Jenkins Ansible</title>
+
+  <link rel="stylesheet" href="styles/cs.css">
+  <!-- <link rel="icon" type="image/svg" href="https://static.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg"> --> 
+</head>
+
+<body>
+<div class="content-wrap">
+
+<h2 id="headerC">
+  Jenkins Ansible GitLab HAProxy.
+</h2>
+
+<p>Пайплайн Jenkins для обновления конфига HAProxy,
+c помощью Ansible и платформы GitLab.
+
+Состав проекта:
+- Сервер (VM Centos 9).
+    - GitLab CE. Хранит конфиги Ansible и Jenkinks.
+    - Jenkins. Получает код из GitLab, запускает Ansible.
+    - Ansible. Меняет конфиг HAProxy на клиенте.
+- Клиент (VM Centos 9). HAProxy.
+</p>
+
+<p><a href="https://disk.yandex.ru/i/29kz0Epmbaizdg" target="_blank">Демо</a></p>
+
+</div>
+</body>
+
+</html>
