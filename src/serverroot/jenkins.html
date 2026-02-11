@@ -16,11 +16,11 @@
 <h2 id="headerC">
   Сервер Jenkins.
 </h2>
-<p>Локальный сервер Jenkins, запущенный из контейнера docker. 
+<p>Локальный сервер Jenkins в сервисе docker compose.
 Сервер содержит пайплайн приложения Java Maven.</p>
 
 <p>Содержание пайплайна.
-  - Загрузка Java-кода из Github.
+  - Загрузка Java-кода из GitHub.
   - Стадия BUILD: Сборка приложения в jar файл (mvn -B -DskipTests clean package).
   - Стадия TEST: Проводит тесты JUnit (mvn test), сохраняет результаты (XML) и выводит их в кабинете Jenkins.
   - Стадия DELIVER: Скрипт (deliver.sh) сохраняет приложение (jar) в репо для Maven-пакетов и запускает его (java jar).
