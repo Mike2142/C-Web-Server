@@ -73,6 +73,9 @@ docker compose --profile maven down
 cd /root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
 ./prometheus --config.file=prometheus.yml --web.listen-address=:9091
 
+## Сервер GitLab.
+Запускается автоматически.
+
 ## Terraform Yandex Cloud
 Создание инфры:
     - Папка contrib/terraform/
@@ -103,11 +106,10 @@ cd /root/contrib/prometheus/prometheus-2.53.4.linux-amd64/
 - Мониторинг инфраструктуры Zabbix.
 - Отслеживание OpenTelemetry.
 - Поисковый движок Elastic Search и стек ELK.
-- Сервер Gitlab (удален из-за расхода ресурсов, требует 4 ядра, содержит много сервисов).
-
 
 ## Исправленные ошибки.
 - Ошибки сервера: завершение и чистка процессов.
 - Ошибки HTML-cтраниц: вёрстка, ошибки загружаемых ресурсов.
 - Сетевые ошибки - роутер обрывал соединения при большой нагрузке (торренты, ERR_CONNECTION_RESET).
 - Kubernetes, автоотключение пода при пробросе портов (idle timeout).
+- Сервер GitLab. Настроен для минимального потребления ресурсов.
