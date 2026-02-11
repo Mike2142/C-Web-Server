@@ -16,17 +16,17 @@
 <h2 id="headerC">
   Сервер Jenkins.
 </h2>
-<p>Окружение: Docker compose, VM Linux CentOS.</p>
+<p>Локальный сервер Jenkins, запущенный из контейнера docker. 
+Сервер содержит пайплайн приложения Java Maven.</p>
 
-<p>Пайплайн CI/CD для приложения Java Maven.
+<p>Содержание пайплайна.
   - Загрузка Java-кода из Github.
   - Стадия BUILD: Сборка приложения в jar файл (mvn -B -DskipTests clean package).
   - Стадия TEST: Проводит тесты JUnit (mvn test), сохраняет результаты (XML) и выводит их в кабинете Jenkins.
   - Стадия DELIVER: Скрипт (deliver.sh) сохраняет приложение (jar) в репо для Maven-пакетов и запускает его (java jar).
 </p>
 
-<p><a href="http://46.38.107.141:2717/" target="_blank">Кабинет Jenkins</a>.
-<a href="http://46.38.107.141:2717/job/Java-Maven-Pipeline/" target="_blank">Пайплайн CI/CD</a>.</p>
+<p><a href="http://46.38.107.141:2717/" target="_blank">Сервер</a>
 
 </div>
 </body>
