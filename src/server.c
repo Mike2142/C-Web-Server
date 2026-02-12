@@ -156,14 +156,14 @@ void get_file(int fd, struct cache *cache, char *request_path)
 
     int rootflag = strcmp(request_path, "/");
     int idxflag = strcmp(request_path, "/index.html");
+    int root_eng_flag = strcmp(request_path, "/en/");
+    int root_eng_flag2 = strcmp(request_path, "/en");
+    int idx_eng_flag = strcmp(request_path, "/en/index.html");
     int commentsflag = strcmp(request_path, "/comments.html");
-    int devopsflag = strcmp(request_path, "/devops");
 
-    if (devopsflag = 0) {
-        request_path = "/devops.html";
-    }
-
-    if (rootflag == 0 || idxflag == 0) {
+    if (root_eng_flag == 0 || root_eng_flag2 == 0 || idx_eng_flag == 0) {
+        request_path = "/en/devops-eng.html";
+    } else if (rootflag == 0 || idxflag == 0) {
         request_path = "/devops.html";
     }
 

@@ -1,85 +1,298 @@
+:root {
+  /* Светлая тема (default) */
+  --bg-main: #ffffff;
+  --bg-panel: rgba(255, 255, 255, 0.85);
+  --bg-active: #f5f5f7;
+  --bg-form: #fafafa;
+  --text-main: #222222;
+  --text-muted: #999999;
+  --accent-color: #007aff;
+  --border-color: #f2f2f2;
+  --input-border: #dddddd;
+  
+  --font-serif: "PT Serif", serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  
+  scroll-padding-top: 80px; 
+}
+
+/* Автоматическая темная тема */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-main: #121212;
+    --bg-panel: rgba(18, 18, 18, 0.85);
+    --bg-active: #2c2c2e;
+    --bg-form: #1c1c1e;
+    --text-main: #e5e5e7;
+    --text-muted: #8e8e93;
+    --accent-color: #0a84ff;
+    --border-color: #2c2c2e;
+    --input-border: #3a3a3c;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  padding-bottom: 20px;
   margin: 0;
-  font-family: "PT Serif", "Times New Roman", Georgia, serif;
-}
-
-button {
-  cursor: pointer;
-}
-
-.topbar {
-  display: block;
-  position: fixed;
-  width: 100%;
-  background: white;
-  padding: 20px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-.topbar button {
-  padding: 3px 15px;
-}
-
-.topbar button:nth-child(n + 2) {
-  margin-left: 10px;
-}
-
-.topbar a {
-  margin-left: 10px;
-}
-
-.content-wrap {
-  padding: 10px 20px 20px 20px;
-}
-
-h1 {
-  font-size: 32px;
-}
-
-h2 {
-  font-size: 24px;
-  color: black;
-}
-
-p {
-  white-space: pre;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-serif);
   font-size: 18px;
-  color: black;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-a {
-  color: #3344DD;
+/* --- Контейнер --- */
+.content-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
-a:visited {
-  color: #884488;
+/* --- Навигационная плашка (Sticky) --- */
+.lang-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  opacity: 0;
+  animation: slideDownFade 0.8s ease-out forwards;
 }
 
+.nav-links, .locale-switcher {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards 0.4s;
+}
+
+/* Ссылки навигации */
+.nav-item, .lang-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-item:hover {
+  color: var(--text-main);
+  border-bottom: 1px solid var(--text-main);
+}
+
+.lang-link:hover {
+  color: var(--accent-color);
+}
+
+.lang-link.active {
+  color: var(--text-main);
+  font-weight: 600;
+  background: var(--bg-active);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Системные элементы */
+.system-label {
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin-right: 5px;
+}
+
+.system-label::before {
+  content: "●";
+  color: #28a745;
+  margin-right: 8px;
+  font-size: 9px;
+  vertical-align: middle;
+}
+
+.divider, .sep {
+  color: var(--border-color);
+  pointer-events: none;
+}
+
+/* --- Типографика --- */
+h1 { font-size: 38px; line-height: 1.2; margin-bottom: 30px; color: var(--text-main); }
+h2 { font-size: 26px; margin-top: 0px; margin-bottom: 20px; color: var(--text-main); }
+
+p { 
+  margin-bottom: 1.8em; 
+  white-space: pre-wrap; 
+}
+
+/* Ссылки в тексте */
+.content-wrap a, .content-wrap a:visited {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(10, 132, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.content-wrap a:hover {
+  border-bottom: 1px solid var(--accent-color);
+  background: rgba(10, 132, 255, 0.1);
+}
+
+/* --- Формы --- */
 form {
-  padding: 0 0 40px 0;
+  margin-top: 40px;
+  padding: 30px;
+  background: var(--bg-form);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
 }
 
-form label {
+label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
   display: block;
-  padding-top: 10px;
 }
 
-form label:first-child {
-  padding-top: 0;
+input[type="text"], input[type="email"], textarea {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-main);
+  color: var(--text-main);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
-form input {
-  display: block;
-  margin-top: 10px;
-}
-
-form input:last-child {
+input[type="submit"], button {
+  background: var(--text-main);
+  color: var(--bg-main);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 14px;
   cursor: pointer;
-  padding: 10px;
-  margin-top: 20px;
+  transition: opacity 0.2s;
+}
+
+input[type="submit"]:hover, button:hover {
+  opacity: 0.8;
+}
+
+/* --- Анимации --- */
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 600px) {
+  .lang-bar {
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    text-align: center;
+  }
+  .content-wrap { padding: 20px; }
+  h1 { font-size: 28px; }
+}
+
+/* Специфический стиль для кнопки назад */
+.back-button {
+  font-weight: 600 !important;
+  color: var(--text-main) !important; /* Делаем чуть чернее остальных */
+  transition: transform 0.2s ease !important;
+}
+
+.back-button:hover {
+  transform: translateX(-5px); /* Легкий сдвиг влево при наведении */
+  border-bottom: none !important; /* Убираем подчеркивание для этой кнопки */
+}
+
+.lang-bar.no-anim {
+  animation: none;
+  opacity: 1; /* Чтобы она была сразу видна */
+}
+.lang-bar.no-anim .nav-links, 
+.lang-bar.no-anim .locale-switcher {
+  animation: none;
+  opacity: 1;
+}
+
+/* Эффект для раздела, на который перешли */
+section:target {
+  animation: section-highlight 2s ease-out;
+}
+
+/* Анимация подсветки */
+@keyframes section-highlight {
+  0% {
+      background-color: rgba(0, 122, 255, 0.1); /* Цвет твоего акцента, очень прозрачный */
+      box-shadow: -10px 0 0 var(--accent-color); /* Полоска слева */
+  }
+  30% {
+      background-color: rgba(0, 122, 255, 0.05);
+  }
+  100% {
+      background-color: transparent;
+      box-shadow: -10px 0 0 transparent;
+  }
+}
+
+/* Чтобы полоска не прилипала к тексту */
+section {
+  padding-left: 15px;
+  margin-left: -15px; /* Компенсируем паддинг, чтобы текст не уехал вправо */
+  transition: background-color 0.5s ease;
+}
+
+footer {
+  margin-top: 80px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  text-align: center;
+}
+
+.build-info {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: lowercase;
+  margin-top: 15px;
+  opacity: 0.7;
+}
+
+.status-icon {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #28a745; /* Зеленый "success" */
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.4);
+}
+
+/* Эффект при наведении на дату */
+.build-info:hover {
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }

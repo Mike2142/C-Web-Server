@@ -5,6 +5,11 @@
 while true; do ./server; done
 
 cd src && make && ./server
+make && while true; do ./server; done
+
+## Мониторинг:
+watch 'free -h'
+watch 'top -b -n 1 | head -5'
 
 ## Запуск прокси-сервера NGINX (TLS шифрование).
 Генерация тестовых сертификатов.
