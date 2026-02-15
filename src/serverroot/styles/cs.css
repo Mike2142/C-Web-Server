@@ -204,15 +204,54 @@ input[type="submit"]:hover, button:hover {
 }
 
 /* --- Адаптивность --- */
+/* --- Улучшенная адаптивность для всех страниц (Main + Server) --- */
 @media (max-width: 600px) {
+  :root {
+    /* Увеличиваем отступ, так как плашка в две строки стала выше */
+    scroll-padding-top: 110px; 
+  }
+  
+  /* 1. Плашка (Header) */
   .lang-bar {
     flex-direction: column;
-    padding: 20px;
-    gap: 15px;
+    padding: 15px 20px;
+    gap: 12px;
     text-align: center;
   }
-  .content-wrap { padding: 20px; }
+
+  .nav-links {
+    justify-content: center;
+    flex-wrap: wrap; /* Чтобы кнопки "проекты/стек" не вылетали за экран */
+    gap: 10px;
+  }
+
+  /* 2. Контент и шрифты */
+  .content-wrap {
+    padding: 20px 15px 40px 15px; /* Уменьшаем боковые поля, чтобы текст не был слишком узким */
+  }
+
+  body {
+    font-size: 17px; /* Оптимально для мобильного чтения PT Serif */
+    line-height: 1.7; /* Чуть плотнее для компактности */
+  }
+
   h1 { font-size: 28px; }
+  h2 { font-size: 22px; margin-top: 30px; }
+
+  /* 3. Списки (важно для страницы Server) */
+  ul, .resource-list {
+    padding-left: 18px; /* Буллиты и стрелочки не должны съедать много места */
+  }
+
+  li {
+    margin-bottom: 8px; /* Увеличиваем кликабельную область для пальца */
+  }
+
+  /* 4. Скрываем лишние детали на совсем маленьких экранах */
+  @media (max-width: 400px) {
+    .system-label { display: none; } /* Скрываем "locale:", оставляем только коды */
+    .lang-bar { font-size: 12px; }
+  }
 }
 
 /* Специфический стиль для кнопки назад */
@@ -295,4 +334,49 @@ footer {
 .build-info:hover {
   opacity: 1;
   transition: opacity 0.3s ease;
+}
+
+/* Tight resource list without bullets */
+.resource-list {
+  list-style: none; /* No bullets */
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+.resource-list li {
+  margin-bottom: 8px; /* Tight spacing like your other lists */
+  position: relative;
+  padding-left: 20px;
+}
+
+/* Optional: Add a subtle terminal-style prefix instead of a bullet */
+.resource-list li::before {
+  content: "→"; /* Or use ">" for a more command-line look */
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono); /* Technical font for the arrow */
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+/* Make links pop on hover */
+.resource-list li a:hover {
+  color: var(--accent-color);
+  background: rgba(10, 132, 255, 0.05);
+}
+
+/* Уменьшаем отступ, если сразу после p идет список */
+p + ul {
+  margin-top: -10px; /* Подтягиваем список выше */
+}
+
+/* Либо можно сделать более глобально для всех списков */
+ul {
+  margin-top: 5px; /* Минимальный зазор для связи с текстом */
+  padding-left: 20px; /* Чтобы буллиты не вылетали за край */
+}
+
+li {
+  margin-bottom: 4px; /* Плотность внутри самого списка */
 }

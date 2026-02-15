@@ -1,64 +1,66 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>Mkolyadin.ru Веб-сервер</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-сервер | mkolyadin.dev</title>
 
-  <link rel="stylesheet" href="styles/cs.css">
-  <!-- <link rel="icon" type="image/svg" href="https://static.wikia.nocookie.net/starwars/images/7/71/Redstarbird.svg"> --> 
+    <base href="/">
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/cs.css">
 </head>
 
 <body>
 
-<div class="lang-bar no-anim">
-  <!-- Левая часть: Возврат -->
-  <div class="nav-links">
-    <a href="/" class="nav-item back-button">← на главную</a>
-  </div>
+<header class="lang-bar no-anim">
+    <!-- Левая часть: Возврат -->
+    <nav class="nav-links">
+        <a href="/" class="nav-item back-button">← на главную</a>
+    </nav>
 
-  <!-- Правая часть: Локаль (сохраняем для единообразия) -->
-  <div class="locale-switcher">
-    <span class="system-label">locale:</span>
-    <a href="/server.html" class="lang-link active">ru-RU</a>
-    <span class="divider">/</span>
-    <a href="/server.html" class="lang-link">en-GB</a>
-  </div>
-</div>
+    <!-- Правая часть: Локаль -->
+    <div class="locale-switcher">
+        <span class="system-label">locale:</span>
+        <a href="/server.html" class="lang-link active">ru-RU</a>
+        <span class="divider">/</span>
+        <a href="/en/server-eng.html" class="lang-link">en-GB</a>
+    </div>
+</header>
 
-<div class="content-wrap">
+<main class="content-wrap">
+    <section>
+        <h2>Домашний веб-сервер mkolyadin.dev</h2>
+        
+        <p><strong>Описание сервера:</strong></p>
+        <ul>
+            <li>Сервер написан на языке С.</li>
+            <li>Низкоуровневая реализация: работа c памятью, сокетами и системными вызовами.</li>
+            <li>Используется минимальный набор сторонних библиотек.</li>
+            <li>Работает на базе виртуальной машины CentOS 7.</li>
+        </ul>
 
-<h2>
-  Домашний веб-сервер mkolyadin.ru
-</h2>
-<p><b>Описание сервера:</b>
-- Сервер написан на языке С.
-- Низкоуровневая реализация - работа c памятью, сокетами и пр.
-- Используется минимальный набор библиотек.
-- Сервер работает на базе VM Centos 7.
-</p>
+        <p><strong>Функционал сервера:</strong></p>
+        <ul>
+            <li>Высокопроизводительная обработка HTTP-запросов.</li>
+            <li>TLS-шифрование с использованием прокси-сервера NGINX.</li>
+            <li>Кеширование файлов (LRU cache): хэш-таблицы, связанные списки и TTL.</li>
+            <li>Многопоточность (<code>pthread.h</code>), блокировка файлов и чистка памяти.</li>
+            <li>Защита от атак и базовая фильтрация входящих запросов.</li>
+        </ul>
 
-<p><b>Функционал сервера:</b>
-- Обработка HTTP-запросов.
-- TLS-шифрование, благодаря прокси-серверу NGINX.
-- Кеширование файлов (LRU cache). Хэш таблицы и связанные списки. Срок годности кеша.
-- Многопоточность (pthread.h). Блокировка файлов и чистка памяти.
-- Защита от атак. Фильтрация запросов.
-</p>
+        <p><strong>Ресурсы проекта:</strong></p>
+        <ul class="resource-list">
+            <li><a href="/safety.html" target="_blank">Безопасность сервера</a></li>
+            <li><a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">Исходный код (C Implementation)</a></li>
+            <li><a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">Основа проекта</a></li>
+        </ul>
+    </section>
+</main>
 
-<p><a href="/safety.html" target="_blank">Безопасность сервера.</a>
-<a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">Исходный код.</a>
-<a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">Основа проекта.</a>
-</p>
-
-<!-- 
-<p><b>Приложения сервера:</b>
-- <a href="/feedback-form.html" target="_blank">Форма сообщений</a>.
-- <a href="/d20" target="_blank">Генератор чисел</a>.
-</p>
--->
-</div>
 </body>
-
 </html>

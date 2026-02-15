@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Server | mkolyadin.dev</title>
+
+    <base href="/">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/cs.css">
+</head>
+
+<body>
+
+<header class="lang-bar no-anim">
+    <nav class="nav-links">
+        <a href="/en/" class="nav-item back-button">← back to main</a>
+    </nav>
+
+    <div class="locale-switcher">
+        <span class="system-label">locale:</span>
+        <a href="/server.html" class="lang-link">ru-RU</a>
+        <span class="divider">/</span>
+        <a href="/en/server-eng.html" class="lang-link active">en-GB</a>
+    </div>
+</header>
+
+<main class="content-wrap">
+    <section>
+        <h2>Custom Web Server for mkolyadin.dev</h2>
+        
+        <p><strong>Architecture Overview:</strong></p>
+        <ul>
+            <li>Developed in <strong>C language</strong>.</li>
+            <li>Low-level implementation: direct memory management, socket programming.</li>
+            <li>Minimalist approach with a limited set of external libraries.</li>
+            <li>Hosted on a <strong>CentOS 7</strong> virtual machine.</li>
+        </ul>
+
+        <p><strong>Core Functionality:</strong></p>
+        <ul>
+            <li>High-performance HTTP request processing.</li>
+            <li>TLS encryption via <strong>NGINX</strong> reverse proxy.</li>
+            <li>Built-in <strong>LRU caching</strong> system: hash tables, linked lists, and TTL.</li>
+            <li>Multithreaded execution (<code>pthread.h</code>) with file locking and memory cleanup.</li>
+            <li>Security hardening and request filtering logic.</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <!-- Architecture and Functionality lists above... -->
+    
+        <p><strong>Project Resources:</strong></p>
+        <ul class="resource-list">
+            <li><a href="/safety.html" target="_blank">Server Security Details</a></li>
+            <li><a href="https://github.com/Mike2142/C-Web-Server/tree/mkolyadin" target="_blank">Source Code (C Implementation)</a></li>
+            <li><a href="https://github.com/bloominstituteoftechnology/C-Web-Server" target="_blank">Original Project Base</a></li>
+        </ul>
+    </section>
+
+</main>
+
+</body>
+</html>
