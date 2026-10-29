@@ -16,7 +16,7 @@
   scroll-padding-top: 80px; 
 }
 
-/* Автоматическая темная тема */
+/* Автоматическая темная тема 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-main: #121212;
@@ -30,6 +30,7 @@
     --input-border: #3a3a3c;
   }
 }
+*/
 
 html {
   scroll-behavior: smooth;
